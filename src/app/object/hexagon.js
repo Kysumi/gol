@@ -6,6 +6,10 @@ const getColor = () => {
   return 0xff0000;
 };
 
+const outLineColor = () => {
+  return 0x000000;
+};
+
 const getHexagonMatrix = (radius, height) => {
   return [
     -radius,
@@ -29,8 +33,12 @@ export const hexagon = () => {
 
   const hexagon = new pixi.Graphics();
 
-  hexagon.beginFill(getColor());
+  hexagon.beginFill(outLineColor());
   hexagon.drawPolygon(getHexagonMatrix(radius, height));
+  hexagon.endFill();
+
+  hexagon.beginFill(getColor());
+  hexagon.drawPolygon(getHexagonMatrix(radius - 1, height - 1));
   hexagon.endFill();
 
   return hexagon;

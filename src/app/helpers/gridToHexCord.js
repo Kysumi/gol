@@ -2,13 +2,13 @@ import { getRadius, getHeight } from "../config/hexConfig";
 
 export const gridToHexCord = (x, y) => {
   var xIdx = Math.round(x / (getRadius() * (3 / 2)));
-  newx = xIdx * (getRadius() * (3 / 2));
+  const newX = xIdx * (getRadius() * (3 / 2));
+
+  let newY = (newY = Math.round(y / getHeight()) * getHeight());
 
   if (xIdx % 2) {
-    y = Math.floor(y / getHeight()) * getHeight() + getHeight() / 2;
-  } else {
-    y = Math.round(y / getHeight()) * getHeight();
+    newY = Math.floor(y / getHeight()) * getHeight() + getHeight() / 2;
   }
 
-  return { x, y };
+  return { xPos: newX, yPos: newY };
 };

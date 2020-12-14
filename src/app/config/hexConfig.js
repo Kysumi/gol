@@ -1,5 +1,5 @@
 export const getRadius = () => {
-  return 60;
+  return 30;
 };
 
 export const getHeight = () => {
