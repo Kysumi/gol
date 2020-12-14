@@ -1,7 +1,7 @@
 export const getRadius = () => {
-  return 30;
-};
+  return 30
+}
 
 export const getHeight = () => {
-  return getRadius() * Math.sqrt(3);
-};
+  return getRadius() * Math.sqrt(3)
+}
