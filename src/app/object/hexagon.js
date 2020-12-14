@@ -1,13 +1,6 @@
 import * as pixi from "pixi.js";
+import { getRadius, getHeight } from "../config/hexConfig";
 // https://codepen.io/zeakd/pen/NdMBgB Sauce
-
-const getRadius = () => {
-  return 60;
-};
-
-const getHeight = () => {
-  return getRadius() * Math.sqrt(3);
-};
 
 const getColor = () => {
   return 0xff0000;
