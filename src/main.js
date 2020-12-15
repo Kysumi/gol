@@ -14,23 +14,23 @@ const app = new pixi.Application({
 
 document.body.appendChild(app.view)
 
-for (let x = 1; x <= gridSize; x++) {
-  for (let y = 1; y <= gridSize; y++) {
+for (let xGrid = 1; xGrid <= gridSize; xGrid++) {
+  for (let yGrid = 1; yGrid <= gridSize; yGrid++) {
     const hex = hexagon()
 
-    const xSpaced = x * getRadius() + getOffsetX()
-    const ySpaced = y * getRadius() + getOffsetY()
+    const xSpaced = xGrid * getRadius() + getOffsetX()
+    const ySpaced = xGrid * getRadius() + getOffsetY()
 
-    const { xPos, yPos } = gridToHexCord(xSpaced, ySpaced)
+    const { x, y } = gridToHexCord(xSpaced, ySpaced)
 
-    hex.x = xPos
-    hex.y = yPos
+    hex.x = x
+    hex.y = y
 
     app.stage.addChild(hex)
 
-    const txt = debugTxt(x, y)
-    txt.position.x = xPos - 10
-    txt.position.y = yPos - 10
+    const txt = debugTxt(xGrid, yGrid)
+    txt.position.x = x - 10
+    txt.position.y = y - 10
     app.stage.addChild(txt)
   }
 }
