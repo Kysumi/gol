@@ -25,9 +25,9 @@ for (let xGrid = 1; xGrid <= gridSize; xGrid++) {
     const hex = getHexObject(layout)
 
     const xSpaced = xGrid * getRadius() + getOffsetX()
-    const ySpaced = xGrid * getRadius() + getOffsetY()
+    const ySpaced = yGrid * getRadius() + getOffsetY()
 
-    const { x, y } = XOffsetFromPoint(-1, Point(xSpaced, ySpaced))
+    const { x, y } = XOffsetFromPoint(1, Point(xSpaced, ySpaced))
     hex.x = x
     hex.y = y
 
