@@ -1,44 +1,46 @@
+import { Point } from '../grid/positions'
 import * as pixi from 'pixi.js'
-import { getRadius, getHeight } from '../config/hexConfig'
-// https://codepen.io/zeakd/pen/NdMBgB Sauce
 
-const getColor = () => {
+const getFillColor = () => {
   return 0xff0000
 }
 
-const outLineColor = () => {
+const getOutlineColor = () => {
   return 0x000000
 }
 
-const getHexagonMatrix = (radius, height) => {
-  return [
-    -radius,
-    0,
-    -radius / 2,
-    height / 2,
-    radius / 2,
-    height / 2,
-    radius,
-    0,
-    radius / 2,
-    -height / 2,
-    -radius / 2,
-    -height / 2
-  ]
+const hexCornerOffset = (layout, corner) => {
+  const M = layout.orientation
+  const size = layout.size
+
+  const angle = 2.0 * Math.PI * (M.startAngle - corner) / 6.0
+
+  return Point(size.x * Math.cos(angle), size.y * Math.sin(angle))
 }
 
-export const hexagon = () => {
-  const radius = getRadius()
-  const height = getHeight()
+const hexagonMatrix = (layout) => {
+  const corners = []
 
+  for (let i = 0; i < 6; i++) {
+    const offset = hexCornerOffset(layout, i)
+    corners.push(offset.x)
+    corners.push(offset.y)
+  }
+
+  return corners
+}
+
+// q is columns r is row
+export const getHexObject = (layout) => {
   const hexagon = new pixi.Graphics()
 
-  hexagon.beginFill(outLineColor())
-  hexagon.drawPolygon(getHexagonMatrix(radius, height))
+  hexagon.beginFill(getOutlineColor())
+  hexagon.drawPolygon(hexagonMatrix(layout))
   hexagon.endFill()
 
-  hexagon.beginFill(getColor())
-  hexagon.drawPolygon(getHexagonMatrix(radius - 1, height - 1))
+  const fillLayout = { ...layout, size: Point(layout.size.x - 1.5, layout.size.y - 1.5) }
+  hexagon.beginFill(getFillColor())
+  hexagon.drawPolygon(hexagonMatrix(fillLayout))
   hexagon.endFill()
 
   return hexagon
