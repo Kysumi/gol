@@ -9,6 +9,15 @@ const getOutlineColor = () => {
   return 0x000000
 }
 
+/**
+ * Taking into account both the layout and size of hexagon
+ * plot the points
+ *
+ * @param  {Layout} layout
+ * @param  {number} corner
+ *
+ * @return {Point}
+ */
 const hexCornerOffset = (layout, corner) => {
   const M = layout.orientation
   const size = layout.size
@@ -30,7 +39,6 @@ const hexagonMatrix = (layout) => {
   return corners
 }
 
-// q is columns r is row
 export const getHexObject = (layout) => {
   const hexagon = new pixi.Graphics()
 
