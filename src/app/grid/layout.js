@@ -30,3 +30,14 @@ export const YOffsetFromPoint = (offset, h) => {
 
   return Point(col, row)
 }
+
+export const pointToPointOffset = (position) => {
+  const col = position.x + (position.y - (position.y & 1)) / 2
+  const row = position.y
+
+  return Point(col, row)
+}
+
+export const gridToWorldPosition = (point) => {
+  
+}
