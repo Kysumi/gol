@@ -40,6 +40,15 @@ export const pointToPointOffset = (position) => {
   return Point(col, row)
 }
 
+/**
+ * Based on the provided grid point this function will return
+ * a point in the pixel position
+ *
+ * @param  {Layout} layout  The layout of the grid
+ * @param  {Point}  point   The grid position
+ *
+ * @return {Point}  The pixel position
+ */
 export const gridToWorldPosition = (layout, point) => {
   let renderX = point.x * 2
   let renderY = point.y * 2
