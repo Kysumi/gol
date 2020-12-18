@@ -1,4 +1,6 @@
 import { Point } from './positions'
+import { getRadius } from '../config/hexConfig'
+import { getOffsetX, getOffsetY } from '../config/grid'
 
 export const Orientation = (f0, f1, f2, f3, b0, b1, b2, b3, startAngle) => {
   return { f0: f0, f1: f1, f2: f2, f3: f3, b0: b0, b1: b1, b2: b2, b3: b3, startAngle: startAngle }
@@ -38,6 +40,19 @@ export const pointToPointOffset = (position) => {
   return Point(col, row)
 }
 
-export const gridToWorldPosition = (point) => {
-  
+export const gridToWorldPosition = (layout, point) => {
+  let renderX = point.x * 2
+  let renderY = point.y * 2
+
+  if (renderY % 4 !== 0) {
+    renderX++
+  }
+
+  renderX *= Math.sqrt(3) / 2 * getRadius()
+  renderY *= (getRadius() / 4) * 3.0
+
+  renderX += getOffsetX()
+  renderY += getOffsetY()
+
+  return Point(renderX, renderY)
 }
