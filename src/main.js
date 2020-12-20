@@ -1,5 +1,5 @@
 import * as pixi from 'pixi.js'
-import { getHexObject } from './app/object/hexagon'
+import { getHexObject, drawHexagon } from './app/object/hexagon'
 import { gridSize } from './app/config/grid'
 import { debugTxt } from './app/object/tileDebug'
 import { Layout, pointyLayout, gridToWorldPosition } from './app/grid/layout'
@@ -22,11 +22,13 @@ console.log(getNeighbours(Point(2, 2)))
 
 for (let xGrid = 1; xGrid <= gridSize; xGrid++) {
   for (let yGrid = 1; yGrid <= gridSize; yGrid++) {
-    const hex = getHexObject(layout)
+    const hex = getHexObject()
     const { x, y } = gridToWorldPosition(layout, Point(xGrid, yGrid))
 
     hex.x = x
     hex.y = y
+    drawHexagon(layout, hex, 0xDF13DC)
+
     app.stage.addChild(hex)
 
     grid = addToGrid(grid, hex, xGrid)
@@ -38,5 +40,17 @@ for (let xGrid = 1; xGrid <= gridSize; xGrid++) {
     app.stage.addChild(txt)
   }
 }
+
+setInterval(() => {
+  for (let xGrid = 0; xGrid < gridSize; xGrid++) {
+    for (let yGrid = 0; yGrid < gridSize; yGrid++) {
+      const hex = grid[xGrid][yGrid]
+      hex.clear()
+
+      drawHexagon(layout, hex, 0x334158)
+    }
+  }
+}
+, 1000)
 
 console.log(grid)

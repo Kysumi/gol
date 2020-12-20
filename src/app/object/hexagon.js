@@ -1,10 +1,6 @@
 import { Point } from '../grid/positions'
 import * as pixi from 'pixi.js'
 
-const getFillColor = () => {
-  return 0xff0000
-}
-
 const getOutlineColor = () => {
   return 0x000000
 }
@@ -39,17 +35,19 @@ const hexagonMatrix = (layout) => {
   return corners
 }
 
-export const getHexObject = (layout) => {
+export const getHexObject = () => {
   const hexagon = new pixi.Graphics()
 
-  hexagon.beginFill(getOutlineColor())
+  return hexagon
+}
+
+export const drawHexagon = (layout, hexagon, color) => {
+  hexagon.beginFill(getOutlineColor)
   hexagon.drawPolygon(hexagonMatrix(layout))
   hexagon.endFill()
 
   const fillLayout = { ...layout, size: Point(layout.size.x - 1.5, layout.size.y - 1.5) }
-  hexagon.beginFill(getFillColor())
+  hexagon.beginFill(color)
   hexagon.drawPolygon(hexagonMatrix(fillLayout))
   hexagon.endFill()
-
-  return hexagon
 }
