@@ -4,6 +4,7 @@ import { gridSize } from './app/config/grid'
 import { debugTxt } from './app/object/tileDebug'
 import { Layout, pointyLayout, gridToWorldPosition } from './app/grid/layout'
 import { Point } from './app/grid/positions'
+import { getNeighbours } from './app/grid/grid'
 
 const app = new pixi.Application({
   width: 800,
@@ -16,8 +17,7 @@ document.body.appendChild(app.view)
 
 const layout = Layout(pointyLayout, Point(30, 30))
 
-// q is columns r is row
-// x, y then you do -x -y to make a hex
+console.log(getNeighbours(Point(2, 2)))
 
 for (let xGrid = 1; xGrid <= gridSize; xGrid++) {
   for (let yGrid = 1; yGrid <= gridSize; yGrid++) {
