@@ -11,3 +11,15 @@ export const directions = [Point(-1, -1), Point(0, -1), Point(1, 0), Point(0, 1)
 export const getNeighbours = (hex) => {
   return directions.map((direction) => { return add(hex, direction) })
 }
+
+export const addToGrid = (grid, hex, xPosition) => {
+  const newGrid = grid
+
+  if (xPosition > newGrid.length) {
+    newGrid.push([])
+  }
+
+  newGrid[xPosition - 1].push(hex)
+
+  return newGrid
+}

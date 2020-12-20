@@ -4,7 +4,7 @@ import { gridSize } from './app/config/grid'
 import { debugTxt } from './app/object/tileDebug'
 import { Layout, pointyLayout, gridToWorldPosition } from './app/grid/layout'
 import { Point } from './app/grid/positions'
-import { getNeighbours } from './app/grid/grid'
+import { getNeighbours, addToGrid } from './app/grid/grid'
 
 const app = new pixi.Application({
   width: 800,
@@ -16,6 +16,7 @@ const app = new pixi.Application({
 document.body.appendChild(app.view)
 
 const layout = Layout(pointyLayout, Point(30, 30))
+let grid = []
 
 console.log(getNeighbours(Point(2, 2)))
 
@@ -28,6 +29,8 @@ for (let xGrid = 1; xGrid <= gridSize; xGrid++) {
     hex.y = y
     app.stage.addChild(hex)
 
+    grid = addToGrid(grid, hex, xGrid)
+
     const txt = debugTxt(xGrid, yGrid)
     txt.position.x = x - 10
     txt.position.y = y - 10
@@ -35,3 +38,5 @@ for (let xGrid = 1; xGrid <= gridSize; xGrid++) {
     app.stage.addChild(txt)
   }
 }
+
+console.log(grid)
