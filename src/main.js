@@ -27,11 +27,19 @@ for (let xGrid = 1; xGrid <= gridSize; xGrid++) {
 
     hex.x = x
     hex.y = y
-    drawHexagon(layout, hex, 0xDF13DC)
+
+    const isAlive = Math.floor(Math.random() * 10) < 3
+
+    drawHexagon(layout, hex, isAlive ? 0xDF13DC : 0x334158)
 
     app.stage.addChild(hex)
 
-    grid = addToGrid(grid, hex, xGrid)
+    const tileObject = {
+      hex: hex,
+      alive: isAlive
+    }
+
+    grid = addToGrid(grid, tileObject, xGrid)
 
     const txt = debugTxt(xGrid, yGrid)
     txt.position.x = x - 10
@@ -42,13 +50,26 @@ for (let xGrid = 1; xGrid <= gridSize; xGrid++) {
 }
 
 setInterval(() => {
+  let newGrid = []
+
   for (let xGrid = 0; xGrid < gridSize; xGrid++) {
     for (let yGrid = 0; yGrid < gridSize; yGrid++) {
-      const hex = grid[xGrid][yGrid]
+      const { hex } = grid[xGrid][yGrid]
       hex.clear()
 
-      drawHexagon(layout, hex, 0x334158)
+      const isAlive = true
+
+      const newTileObject = {
+        hex: hex,
+        alive: isAlive
+      }
+
+      drawHexagon(layout, hex, isAlive ? 0xDF13DC : 0x334158)
+
+      newGrid = addToGrid(newGrid, newTileObject, xGrid)
     }
+
+    grid = newGrid
   }
 }
 , 1000)
