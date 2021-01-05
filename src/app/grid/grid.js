@@ -8,8 +8,18 @@ export const add = (a, b) => {
 
 export const directions = [Point(-1, -1), Point(0, -1), Point(1, 0), Point(0, 1), Point(-1, 1), Point(-1, 0)]
 
-export const getNeighbours = (hex) => {
-  return directions.map((direction) => { return add(hex, direction) })
+export const getNeighbours = (point, grid) => {
+  return directions.map((direction) => {
+    const position = add(point, direction)
+    if (position.x < 0 || position.x > grid.length) {
+      return null
+    }
+    if (position.y < 0 || position.y > grid.length) {
+      return null
+    }
+
+    return grid[position.x][position.y]
+  })
 }
 
 export const addToGrid = (grid, hex, xPosition) => {

@@ -18,7 +18,7 @@ document.body.appendChild(app.view)
 const layout = Layout(pointyLayout, Point(30, 30))
 let grid = []
 
-console.log(getNeighbours(Point(2, 2)))
+// console.log(getNeighbours(Point(2, 2)))
 
 for (let xGrid = 1; xGrid <= gridSize; xGrid++) {
   for (let yGrid = 1; yGrid <= gridSize; yGrid++) {
@@ -57,7 +57,21 @@ setInterval(() => {
       const { hex } = grid[xGrid][yGrid]
       hex.clear()
 
-      const isAlive = true
+      let isAlive = true
+
+      const neighbours = getNeighbours(Point(1, 1), grid)
+
+      const aliveNeighbours = neighbours.filter((neighbour) => {
+        return neighbours.alive
+      })
+
+      if (aliveNeighbours.count < 2) {
+        isAlive = false
+      }
+
+      if (aliveNeighbours.count > 3) {
+        isAlive = false
+      }
 
       const newTileObject = {
         hex: hex,
