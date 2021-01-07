@@ -1,0 +1,17 @@
+[
+	{
+		"id": 1,
+		"name": "grass",
+		"color": "0x12e34a"
+	},
+	{
+		"id": 2,
+		"name": "dirt",
+		"color": "0xAF601A"
+	},
+	{
+		"id": 3,
+		"name": "rock",
+		"color": "0x707B7C"
+	}
+]
