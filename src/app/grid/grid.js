@@ -25,11 +25,11 @@ export const getNeighbours = (point, grid) => {
 export const addToGrid = (grid, hex, xPosition) => {
   const newGrid = grid
 
-  if (xPosition > newGrid.length) {
+  if (xPosition > newGrid.length || xPosition === 0) {
     newGrid.push([])
   }
 
-  newGrid[xPosition - 1].push(hex)
+  newGrid[xPosition].push(hex)
 
   return newGrid
 }

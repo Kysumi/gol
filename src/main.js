@@ -20,8 +20,8 @@ let grid = []
 
 // console.log(getNeighbours(Point(2, 2)))
 
-for (let xGrid = 1; xGrid <= gridSize; xGrid++) {
-  for (let yGrid = 1; yGrid <= gridSize; yGrid++) {
+for (let xGrid = 0; xGrid <= gridSize; xGrid++) {
+  for (let yGrid = 0; yGrid <= gridSize; yGrid++) {
     const hex = getHexObject()
     const { x, y } = gridToWorldPosition(layout, Point(xGrid, yGrid))
 
@@ -87,5 +87,3 @@ setInterval(() => {
   }
 }
 , 1000)
-
-console.log(grid)
