@@ -18,7 +18,7 @@ document.body.appendChild(app.view)
 const layout = Layout(pointyLayout, Point(30, 30))
 let grid = []
 
-const initTiles = (point) => {
+iterateGrid((point) => {
   const hex = getHexObject()
   const { x, y } = gridToWorldPosition(layout, point)
 
@@ -43,9 +43,7 @@ const initTiles = (point) => {
   txt.position.y = y - 10
 
   app.stage.addChild(txt)
-}
-
-iterateGrid(initTiles)
+})
 
 const isAlive = (point) => {
   const neighbours = getNeighbours(point, grid)
