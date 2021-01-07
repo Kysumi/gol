@@ -1,3 +1,5 @@
+import { addToGrid } from '../grid/grid'
+
 // biome id
 // current type id
 
@@ -17,6 +19,29 @@
 // 	}
 // }
 
-export const setBiomeTileType = (biome, point) => {
+const defaultTile = {
+  tileType: null,
+  biome: null,
+  status: {
+    moisture: 123,
+    fertility: 1
+  }
+}
 
+const getTile = (biome, point) => {
+  const xBiome = biome[point.x]
+
+  if (xBiome === undefined || xBiome[point.y] === undefined) {
+    return defaultTile
+  }
+
+  return xBiome[point.y]
+}
+
+export const setBiomeTileType = (biome, point) => {
+  const tile = getTile(biome, point)
+
+  addToGrid(biome, tile, point.x)
+
+  return biome
 }

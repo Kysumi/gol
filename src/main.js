@@ -47,45 +47,47 @@ iterateGrid((point) => {
   app.stage.addChild(txt)
 })
 
-const isAlive = (point) => {
-  const neighbours = getNeighbours(point, grid)
+console.log(biomeGrid)
 
-  const aliveNeighbours = neighbours.filter((neighbour) => {
-    if (neighbour === null) {
-      return false
-    }
+// const isAlive = (point) => {
+//   const neighbours = getNeighbours(point, grid)
 
-    return neighbour.alive
-  })
+//   const aliveNeighbours = neighbours.filter((neighbour) => {
+//     if (neighbour === null) {
+//       return false
+//     }
 
-  let isAlive = true
-  if (aliveNeighbours.length < 2) {
-    isAlive = false
-  }
+//     return neighbour.alive
+//   })
 
-  if (aliveNeighbours.length > 3) {
-    isAlive = false
-  }
+//   let isAlive = true
+//   if (aliveNeighbours.length < 2) {
+//     isAlive = false
+//   }
 
-  return isAlive
-}
+//   if (aliveNeighbours.length > 3) {
+//     isAlive = false
+//   }
 
-setInterval(() => {
-  let newGrid = []
+//   return isAlive
+// }
 
-  iterateGrid((point) => {
-    const { hex } = grid[point.x][point.y]
-    hex.clear()
+// setInterval(() => {
+//   let newGrid = []
 
-    const newTileObject = {
-      hex: hex,
-      alive: isAlive(point)
-    }
+//   iterateGrid((point) => {
+//     const { hex } = grid[point.x][point.y]
+//     hex.clear()
 
-    drawHexagon(layout, hex, newTileObject.alive ? 0xDF13DC : 0x334158)
+//     const newTileObject = {
+//       hex: hex,
+//       alive: isAlive(point)
+//     }
 
-    newGrid = addToGrid(newGrid, newTileObject, point.x)
-  })
+//     drawHexagon(layout, hex, newTileObject.alive ? 0xDF13DC : 0x334158)
 
-  grid = newGrid
-}, 1000)
+//     newGrid = addToGrid(newGrid, newTileObject, point.x)
+//   })
+
+//   grid = newGrid
+// }, 100)
