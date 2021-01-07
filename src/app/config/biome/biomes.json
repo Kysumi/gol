@@ -1,5 +1,6 @@
 [
   {
+  	"id": 1,
     "name": "grassy",
     "types": [
     	{
@@ -10,6 +11,36 @@
     		},
     		"waterRequired": {
     			"distance": 4
+    		}
+    	},
+    	{
+    		"typeId": 2,
+    		"neighboursRequired": {
+    			"min": null,
+    			"max": null
+    		},
+    		"waterRequired": {
+    			"distance": 4
+    		}
+    	},
+    	{
+    		"typeId": 3,
+    		"neighboursRequired": {
+    			"min": null,
+    			"max": null
+    		},
+    		"waterRequired": {
+    			"distance": 4
+    		}
+    	},
+    	{
+    		"typeId": 4,
+    		"neighboursRequired": {
+    			"min": null,
+    			"max": null
+    		},
+    		"waterRequired": {
+    			"distance": null
     		}
     	}
     ]

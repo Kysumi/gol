@@ -1,4 +1,5 @@
 import { Point } from './positions'
+import { gridSize } from '../config/grid'
 // export const directions = [Hex(1, 0, -1), Hex(0, 1, -1), Hex(-1, 1, 0), Hex(-1, 0, 1), Hex(0, -1, 1), Hex(1, -1, 0)]
 // const hex_diagonals = [Hex(2, -1, -1), Hex(1, -2, 1), Hex(-1, -1, 2), Hex(-2, 1, 1), Hex(-1, 2, -1), Hex(1, 1, -2)]
 
@@ -32,4 +33,12 @@ export const addToGrid = (grid, hex, xPosition) => {
   newGrid[xPosition].push(hex)
 
   return newGrid
+}
+
+export const iterateGrid = (callback) => {
+  for (let xGrid = 0; xGrid < gridSize; xGrid++) {
+    for (let yGrid = 0; yGrid < gridSize; yGrid++) {
+      callback(Point(xGrid, yGrid))
+    }
+  }
 }
