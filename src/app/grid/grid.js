@@ -11,10 +11,10 @@ export const directions = [Point(-1, -1), Point(0, -1), Point(1, 0), Point(0, 1)
 export const getNeighbours = (point, grid) => {
   return directions.map((direction) => {
     const position = add(point, direction)
-    if (position.x < 0 || position.x > grid.length) {
+    if (position.x < 0 || position.x >= grid.length) {
       return null
     }
-    if (position.y < 0 || position.y > grid.length) {
+    if (position.y < 0 || position.y >= grid.length) {
       return null
     }
 

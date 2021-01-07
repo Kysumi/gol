@@ -18,8 +18,6 @@ document.body.appendChild(app.view)
 const layout = Layout(pointyLayout, Point(30, 30))
 let grid = []
 
-// console.log(getNeighbours(Point(2, 2)))
-
 for (let xGrid = 0; xGrid < gridSize; xGrid++) {
   for (let yGrid = 0; yGrid < gridSize; yGrid++) {
     const hex = getHexObject()
@@ -49,6 +47,29 @@ for (let xGrid = 0; xGrid < gridSize; xGrid++) {
   }
 }
 
+const isAlive = (point) => {
+  const neighbours = getNeighbours(point, grid)
+
+  const aliveNeighbours = neighbours.filter((neighbour) => {
+    if (neighbour === null) {
+      return false
+    }
+
+    return neighbour.alive
+  })
+
+  let isAlive = true
+  if (aliveNeighbours.length < 2) {
+    isAlive = false
+  }
+
+  if (aliveNeighbours.length > 3) {
+    isAlive = false
+  }
+
+  return isAlive
+}
+
 setInterval(() => {
   let newGrid = []
 
@@ -57,33 +78,17 @@ setInterval(() => {
       const { hex } = grid[xGrid][yGrid]
       hex.clear()
 
-      let isAlive = true
-
-      const neighbours = getNeighbours(Point(1, 1), grid)
-
-      const aliveNeighbours = neighbours.filter((neighbour) => {
-        return neighbours.alive
-      })
-
-      if (aliveNeighbours.count < 2) {
-        isAlive = false
-      }
-
-      if (aliveNeighbours.count > 3) {
-        isAlive = false
-      }
-
       const newTileObject = {
         hex: hex,
-        alive: isAlive
+        alive: isAlive(Point(xGrid, yGrid))
       }
 
-      drawHexagon(layout, hex, isAlive ? 0xDF13DC : 0x334158)
+      drawHexagon(layout, hex, newTileObject.alive ? 0xDF13DC : 0x334158)
 
       newGrid = addToGrid(newGrid, newTileObject, xGrid)
     }
   }
-
+  console.log('Cylce complete')
   grid = newGrid
 }
 , 1000)
