@@ -1,6 +1,5 @@
 import * as pixi from 'pixi.js'
 import { getHexObject, drawHexagon } from './app/object/hexagon'
-import { gridSize } from './app/config/grid'
 import { debugTxt } from './app/object/tileDebug'
 import { Layout, pointyLayout, gridToWorldPosition } from './app/grid/layout'
 import { Point } from './app/grid/positions'
