@@ -74,10 +74,10 @@ export const getBiomeTileData = (
 };
 
 const makeNewTile = (biome: Biome, point: Point, grid: BiomeTileType[][]) => {
-  const neighbours = getNeighbours(point, grid);
+  const neighbours = getNeighbours(point, grid) as BiomeTileType[];
   const count = [];
 
-  neighbours.map(() => {});
+  // const collection = neighbours.reduce((accu, current) => {});
 
   return biome.types[0];
 };
