@@ -1,69 +1,66 @@
 [
   {
-  	"id": 1,
+    "id": 1,
     "name": "grassy",
     // -100 to 100
     "conditions": {
-       "humidity": 10,
-       "temperature ": 10,
-       "waterLevel": 50,
-       "fetility": 50
+      "humidity": 10,
+      "temperature": 10,
+      "waterLevel": 50,
+      "fetility": 50
     },
     "types": [
-    	{
-    		"typeId": 1,
-    		"neighboursRequired": {
-    			"min": null,
-    			"max": null
-    		},
-    		"waterRequired": {
-    			"distance": 4
-    		}
-    	},
-    	{
-    		"typeId": 2,
-    		"neighboursRequired": {
-    			"min": null,
-    			"max": null
-    		},
-    		"waterRequired": {
-    			"distance": 4
-    		},
+      {
+        "typeId": 1,
+        "neighboursRequired": {
+          "min": null,
+          "max": null
+        },
+        "waterRequirements": {
+          "distance": 4
+        }
+      },
+      {
+        "typeId": 2,
+        "neighboursRequired": {
+          "min": null,
+          "max": null
+        },
+        "waterRequirements": {
+          "distance": 4
+        },
         "potentialSpawn": [
-      		{
-      			"typeId": 1,
-      			
-      		},
-      		{
-      			"typeId": 5,
-
-      		},
-      		{
-      			"typeId": 6,
-
-      		}
+          {
+            "typeId": 1
+          },
+          {
+            "typeId": 5
+          },
+          {
+            "typeId": 6
+          }
         ]
-    	},
-    	{
-    		"typeId": 3,
-    		"neighboursRequired": {
-    			"min": null,
-    			"max": null
-    		},
-    		"waterRequired": {
-    			"distance": 4
-    		}
-    	},
-    	{
-    		"typeId": 4,
-    		"neighboursRequired": {
-    			"min": null,
-    			"max": null
-    		},
-    		"waterRequired": {
-    			"distance": null
-    		}
-    	}
+      },
+      {
+        "typeId": 3,
+        "neighboursRequired": {
+          "min": null,
+          "max": null
+        },
+        "waterRequirements": {
+          "distance": 4
+        }
+      },
+      {
+        "typeId": 4,
+        "neighboursRequired": {
+          "min": null,
+          "max": null
+        },
+        "waterRequirements": {
+          "distance": null
+        }
+      }
     ]
   }
 ]

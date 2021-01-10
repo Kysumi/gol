@@ -1,4 +1,5 @@
 import { addToGrid, getNeighbours, getFromGrid } from "../grid/grid";
+import { Point } from "../grid/positions";
 
 // biome id
 // current type id
@@ -19,6 +20,36 @@ import { addToGrid, getNeighbours, getFromGrid } from "../grid/grid";
 // 	}
 // }
 
+interface Conditions {
+  humidity: number;
+  temperature: number;
+  waterLevel: number;
+  fetility: number;
+}
+
+interface NeighbourRequirements {
+  min?: number;
+  max?: number;
+}
+
+interface WaterRequirements {
+  distance: number;
+}
+
+export interface BiomeTileType {
+  typeId: number;
+  neighboursRequired: NeighbourRequirements;
+  waterRequired: WaterRequirements;
+}
+
+export interface Biome {
+  id: number;
+  name: string;
+  conditions: Conditions;
+  types: BiomeTileType[];
+  waterRequirements: WaterRequirements;
+}
+
 const defaultTile = {
   tileTypeId: null,
   biome: null,
@@ -28,7 +59,11 @@ const defaultTile = {
   },
 };
 
-export const getBiomeTileData = (grid, point, biome) => {
+export const getBiomeTileData = (
+  grid: BiomeTileType[][],
+  point: Point,
+  biome: Biome
+) => {
   const tile = getFromGrid(point, grid);
 
   if (tile === null) {
@@ -38,7 +73,7 @@ export const getBiomeTileData = (grid, point, biome) => {
   return tile;
 };
 
-const makeNewTile = (biome, point, grid) => {
+const makeNewTile = (biome: Biome, point: Point, grid: BiomeTileType[][]) => {
   const neighbours = getNeighbours(point, grid);
   const count = [];
 
@@ -47,6 +82,10 @@ const makeNewTile = (biome, point, grid) => {
   return biome.types[0];
 };
 
-export const setBiomeTileType = (biome, point, data) => {
+export const setBiomeTileType = (
+  biome: BiomeTileType[][],
+  point: Point,
+  data: BiomeTileType
+) => {
   return addToGrid(biome, data, point.x);
 };

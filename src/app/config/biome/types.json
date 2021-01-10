@@ -1,32 +1,32 @@
 [
-	{
-		"id": 1,
-		"name": "grass",
-		"color": "0x12e34a"
-	},
-	{
-		"id": 2,
-		"name": "dirt",
-		"color": "0xAF601A"
-	},
-	{
-		"id": 3,
-		"name": "rock",
-		"color": "0x707B7C"
-	},
-	{
-		"id": 4,
-		"name": "water",
-		"color": "0x059FF1"
-	},
-	{
-		"id": 5,
-		"name": "sand",
-		"color": "0xFFC300"
-	},
-	{
-		"id": 6,
-		"name": "gravel",
-		"color": "0x707B7C"
-	}
+  {
+    "id": 1,
+    "name": "grass",
+    "color": "0x12e34a"
+  },
+  {
+    "id": 2,
+    "name": "dirt",
+    "color": "0xAF601A"
+  },
+  {
+    "id": 3,
+    "name": "rock",
+    "color": "0x707B7C"
+  },
+  {
+    "id": 4,
+    "name": "water",
+    "color": "0x059FF1"
+  },
+  {
+    "id": 5,
+    "name": "sand",
+    "color": "0xFFC300"
+  },
+  {
+    "id": 6,
+    "name": "gravel",
+    "color": "0x707B7C"
+  }
 ]

@@ -2,7 +2,29 @@ import { Point } from "./positions";
 import { getRadius } from "../config/hexConfig";
 import { getOffsetX, getOffsetY } from "../config/grid";
 
-export const Orientation = (f0, f1, f2, f3, b0, b1, b2, b3, startAngle) => {
+interface Orientation {
+  f0: number;
+  f1: number;
+  f2: number;
+  f3: number;
+  b0: number;
+  b1: number;
+  b2: number;
+  b3: number;
+  startAngle: number;
+}
+
+export const Orientation = (
+  f0: number,
+  f1: number,
+  f2: number,
+  f3: number,
+  b0: number,
+  b1: number,
+  b2: number,
+  b3: number,
+  startAngle: number
+) => {
   return {
     f0: f0,
     f1: f1,
@@ -27,6 +49,7 @@ export const pointyLayout = Orientation(
   2.0 / 3.0,
   0.5
 );
+
 export const flatLayout = Orientation(
   3.0 / 2.0,
   0.0,
@@ -45,25 +68,30 @@ const offsets = {
   even: 1,
 };
 
-export const Layout = (orientation, size) => {
+export interface Layout {
+  orientation: Orientation;
+  size: Point;
+}
+
+export const Layout = (orientation: Orientation, size: Point): Layout => {
   return { orientation: orientation, size: size };
 };
 
-export const XOffsetFromPoint = (offset, point) => {
-  const x = point.x + Math.trunc((point.y + offset * (point.y & 1)) / 2);
-  const y = point.y;
+// export const XOffsetFromPoint = (offset: number, point: Point) => {
+//   const x = point.x + Math.trunc((point.y + offset * (point.y & 1)) / 2);
+//   const y = point.y;
 
-  return Point(x, y);
-};
+//   return Point(x, y);
+// };
 
-export const YOffsetFromPoint = (offset, h) => {
-  const col = h.x;
-  const row = h.y + Math.trunc((h.x + offset * (h.x & 1)) / 2);
+// export const YOffsetFromPoint = (offset: number, h) => {
+//   const col = h.x;
+//   const row = h.y + Math.trunc((h.x + offset * (h.x & 1)) / 2);
 
-  return Point(col, row);
-};
+//   return Point(col, row);
+// };
 
-export const pointToPointOffset = (position) => {
+export const pointToPointOffset = (position: Point) => {
   const col = position.x + (position.y - (position.y & 1)) / 2;
   const row = position.y;
 
@@ -79,10 +107,9 @@ export const pointToPointOffset = (position) => {
  *
  * @return {Point}  The pixel position
  */
-export const gridToWorldPosition = (layout, point) => {
+export const gridToWorldPosition = (layout: Layout, point: Point) => {
   let renderX = point.x * 2;
   let renderY = point.y * 2;
-
   if (renderY % 4 !== 0) {
     renderX++;
   }
