@@ -1,4 +1,4 @@
-import { addToGrid } from '../grid/grid'
+import { addToGrid, getNeighbours, getFromGrid } from '../grid/grid'
 
 // biome id
 // current type id
@@ -29,31 +29,22 @@ const defaultTile = {
 }
 
 export const getBiomeTileData = (grid, point, biome) => {
-  const tile = getTile(grid, point)
+  const tile = getFromGrid(point, grid)
 
   if (tile === null) {
-    return makeNewTile(biome)
+    return makeNewTile(biome, point, grid)
   }
 
   return tile
 }
 
-const makeNewTile = (biome) => {
+const makeNewTile = (biome, point, grid) => {
+  const neighbours = getNeighbours(point, grid)
   return biome.types[0]
 }
 
-const getTile = (grid, point) => {
-  const xBiome = grid[point.x]
-
-  if (xBiome === undefined || xBiome[point.y] === undefined) {
-    return null
-  }
-
-  return xBiome[point.y]
-}
-
 export const setBiomeTileType = (biome, point) => {
-  const tile = getTile(biome, point)
+  const tile = getFromGrid(point, biome)
 
   addToGrid(biome, tile, point.x)
 

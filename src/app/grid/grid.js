@@ -9,6 +9,16 @@ export const add = (a, b) => {
 
 export const directions = [Point(-1, -1), Point(0, -1), Point(1, 0), Point(0, 1), Point(-1, 1), Point(-1, 0)]
 
+export const getFromGrid = (point, grid) => {
+  const slice = grid[point.x]
+
+  if (slice === undefined || slice[point.y] === undefined) {
+    return null
+  }
+
+  return slice[point.y]
+}
+
 export const getNeighbours = (point, grid) => {
   return directions.map((direction) => {
     const position = add(point, direction)
@@ -19,7 +29,7 @@ export const getNeighbours = (point, grid) => {
       return null
     }
 
-    return grid[position.x][position.y]
+    return getFromGrid(point, grid)
   })
 }
 
