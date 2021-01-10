@@ -1,59 +1,59 @@
-import * as pixi from 'pixi.js'
-import { getHexObject, drawHexagon } from './app/object/hexagon'
-import { debugTxt } from './app/object/tileDebug'
-import { Layout, pointyLayout, gridToWorldPosition } from './app/grid/layout'
-import { Point } from './app/grid/positions'
-import { getNeighbours, addToGrid, iterateGrid } from './app/grid/grid'
-import { setBiomeTileType, getBiomeTileData } from './app/biome/biome'
-import * as biomes from './app/config/biome/biomes.json'
-import { getTypeById } from './app/biome/type.js'
+import * as pixi from "pixi.js";
+import { getHexObject, drawHexagon } from "./app/object/hexagon";
+import { debugTxt } from "./app/object/tileDebug";
+import { Layout, pointyLayout, gridToWorldPosition } from "./app/grid/layout";
+import { Point } from "./app/grid/positions";
+import { getNeighbours, addToGrid, iterateGrid } from "./app/grid/grid";
+import { setBiomeTileType, getBiomeTileData } from "./app/biome/biome";
+import * as biomes from "./app/config/biome/biomes.json";
+import { getTypeById } from "./app/biome/type.js";
 
 const app = new pixi.Application({
   width: 800,
   height: 600,
   backgroundColor: 0x1099bb,
-  resolution: window.devicePixelRatio || 1
-})
+  resolution: window.devicePixelRatio || 1,
+});
 
-document.body.appendChild(app.view)
+document.body.appendChild(app.view);
 
-const layout = Layout(pointyLayout, Point(30, 30))
-let grid = []
-let biomeGrid = []
-const biome = biomes[0]
+const layout = Layout(pointyLayout, Point(30, 30));
+let grid = [];
+let biomeGrid = [];
+const biome = biomes[0];
 
 iterateGrid((point) => {
-  const hex = getHexObject()
-  const { x, y } = gridToWorldPosition(layout, point)
+  const hex = getHexObject();
+  const { x, y } = gridToWorldPosition(layout, point);
 
-  hex.x = x
-  hex.y = y
+  hex.x = x;
+  hex.y = y;
 
-  const isAlive = Math.floor(Math.random() * 10) < 3
+  const isAlive = Math.floor(Math.random() * 10) < 3;
 
-  const biomeTileData = getBiomeTileData(biomeGrid, point, biome)
-  biomeGrid = setBiomeTileType(biomeGrid, point, biomeTileData)
-  const tileType = getTypeById(biomeTileData.typeId)
+  const biomeTileData = getBiomeTileData(biomeGrid, point, biome);
+  biomeGrid = setBiomeTileType(biomeGrid, point, biomeTileData);
+  const tileType = getTypeById(biomeTileData.typeId);
 
-  drawHexagon(layout, hex, tileType.color)
+  drawHexagon(layout, hex, tileType.color);
 
-  app.stage.addChild(hex)
+  app.stage.addChild(hex);
 
   const tileObject = {
     hex: hex,
-    alive: isAlive
-  }
+    alive: isAlive,
+  };
 
-  grid = addToGrid(grid, tileObject, point.x)
+  grid = addToGrid(grid, tileObject, point.x);
 
-  const txt = debugTxt(point.x, point.y)
-  txt.position.x = x - 10
-  txt.position.y = y - 10
+  const txt = debugTxt(point.x, point.y);
+  txt.position.x = x - 10;
+  txt.position.y = y - 10;
 
-  app.stage.addChild(txt)
-})
+  app.stage.addChild(txt);
+});
 
-console.log(biomeGrid)
+console.log(biomeGrid);
 
 // const isAlive = (point) => {
 //   const neighbours = getNeighbours(point, grid)

@@ -1,9 +1,9 @@
 export const getOffsetX = () => {
-  return 100
-}
+  return 100;
+};
 
 export const getOffsetY = () => {
-  return 100
-}
+  return 100;
+};
 
-export const gridSize = 10
+export const gridSize = 10;

@@ -1,3 +1,3 @@
 export const getRadius = () => {
-  return 30
-}
+  return 30;
+};
