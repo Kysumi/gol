@@ -2,10 +2,12 @@
   {
   	"id": 1,
     "name": "grassy",
+    // -100 to 100
     "conditions": {
-        "heat": 10,
-        "wind": 10,
-
+       "humidity": 10,
+       "temperature ": 10,
+       "waterLevel": 50,
+       "fetility": 50
     },
     "types": [
     	{
@@ -16,10 +18,7 @@
     		},
     		"waterRequired": {
     			"distance": 4
-    		},
-            "spawn": {
-                "chance": 0.5
-            }
+    		}
     	},
     	{
     		"typeId": 2,
@@ -30,9 +29,20 @@
     		"waterRequired": {
     			"distance": 4
     		},
-            "spawn": {
-                "chance": 0.5
-            }
+        "potentialSpawn": [
+      		{
+      			"typeId": 1,
+      			
+      		},
+      		{
+      			"typeId": 5,
+
+      		},
+      		{
+      			"typeId": 6,
+
+      		}
+        ]
     	},
     	{
     		"typeId": 3,
@@ -42,10 +52,7 @@
     		},
     		"waterRequired": {
     			"distance": 4
-    		},           
-            "spawn": {
-                "chance": 0.5
-            }
+    		}
     	},
     	{
     		"typeId": 4,
@@ -55,12 +62,8 @@
     		},
     		"waterRequired": {
     			"distance": null
-    		},            
-            "spawn": {
-                "chance": 0.5
-            }
+    		}
     	}
     ]
-
   }
 ]

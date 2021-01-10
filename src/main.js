@@ -4,7 +4,9 @@ import { debugTxt } from './app/object/tileDebug'
 import { Layout, pointyLayout, gridToWorldPosition } from './app/grid/layout'
 import { Point } from './app/grid/positions'
 import { getNeighbours, addToGrid, iterateGrid } from './app/grid/grid'
-import { setBiomeTileType } from './app/biome/biome'
+import { setBiomeTileType, getBiomeTileData } from './app/biome/biome'
+import * as biomes from './app/config/biome/biomes.json'
+import { getTypeById } from './app/biome/type.js'
 
 const app = new pixi.Application({
   width: 800,
@@ -18,6 +20,7 @@ document.body.appendChild(app.view)
 const layout = Layout(pointyLayout, Point(30, 30))
 let grid = []
 let biomeGrid = []
+const biome = biomes[0]
 
 iterateGrid((point) => {
   const hex = getHexObject()
@@ -28,8 +31,11 @@ iterateGrid((point) => {
 
   const isAlive = Math.floor(Math.random() * 10) < 3
 
-  drawHexagon(layout, hex, isAlive ? 0xDF13DC : 0x334158)
-  biomeGrid = setBiomeTileType(biomeGrid, point)
+  const biomeTileData = getBiomeTileData(biomeGrid, point, biome)
+  biomeGrid = setBiomeTileType(biomeGrid, point, biomeTileData)
+  const tileType = getTypeById(biomeTileData.typeId)
+
+  drawHexagon(layout, hex, tileType.color)
 
   app.stage.addChild(hex)
 

@@ -18,5 +18,15 @@
 		"id": 4,
 		"name": "water",
 		"color": "0x059FF1"
+	},
+	{
+		"id": 5,
+		"name": "sand",
+		"color": "0xFFC300"
+	},
+	{
+		"id": 6,
+		"name": "gravel",
+		"color": "0x707B7C"
 	}
 ]
