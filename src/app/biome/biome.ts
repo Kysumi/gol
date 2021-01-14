@@ -27,11 +27,13 @@ import { biomes } from "./loader/biomeLoader";
 // 	}
 // }
 
-interface Conditions {
+export interface Conditions {
   humidity: number;
   temperature: number;
   waterLevel: number;
   fetility: number;
+  moisture: number;
+  heat: number;
 }
 
 interface NeighbourRequirements {
@@ -41,12 +43,19 @@ interface NeighbourRequirements {
 
 interface WaterRequirements {
   level: number;
+  moisture: number;
 }
 
+/**
+ * Initial configuration based on the biomes rules
+ *
+ * If you are looking for the current state of the tile it is
+ * in the BiomeTile
+ */
 export interface BiomeTileType {
   typeId: number;
   neighboursRequired: NeighbourRequirements;
-  waterRequired: WaterRequirements;
+  waterRequirements: WaterRequirements;
   conditions: Conditions;
   biomeId: number;
 }
@@ -56,7 +65,6 @@ export interface Biome {
   name: string;
   conditions: Conditions;
   types: BiomeTileType[];
-  waterRequirements: WaterRequirements;
 }
 
 // const defaultTile = {
@@ -104,9 +112,11 @@ const makeNewTile = (
   // const collection = neighbours.reduce((accu, current) => {});
 
   const tileTypeId = Math.floor(Math.random() * biome.types.length);
+
   const type = {
-    ...biome.types[tileTypeId],
     biomeId: biome.id,
+    typeId: biome.types[tileTypeId].typeId,
+    currentState: biome.types[tileTypeId].conditions,
   };
 
   return type;

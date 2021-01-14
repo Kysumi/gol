@@ -1,3 +1,7 @@
-import { BiomeTileType } from "./biome";
+import { Conditions } from "./biome";
 
-export interface BiomeTile extends BiomeTileType {}
+export interface BiomeTile {
+  typeId: number;
+  biomeId: number;
+  currentState: Conditions;
+}

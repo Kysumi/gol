@@ -91,13 +91,6 @@ export const Layout = (orientation: Orientation, size: Point): Layout => {
 //   return Point(col, row);
 // };
 
-export const pointToPointOffset = (position: Point) => {
-  const col = position.x + (position.y - (position.y & 1)) / 2;
-  const row = position.y;
-
-  return Point(col, row);
-};
-
 /**
  * Based on the provided grid point this function will return
  * a point in the pixel position

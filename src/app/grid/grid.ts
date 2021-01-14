@@ -17,7 +17,7 @@ export const directions = [
   Point(-1, 0),
 ];
 
-export const getFromGrid = (point: Point, grid: any) => {
+export const getFromGrid = (point: Point, grid: any): any | null => {
   const slice = grid[point.x];
 
   if (slice === undefined || slice[point.y] === undefined) {
