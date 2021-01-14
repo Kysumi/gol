@@ -2,7 +2,6 @@
   {
     "id": 1,
     "name": "grassy",
-    // -100 to 100
     "conditions": {
       "humidity": 10,
       "temperature": 10,

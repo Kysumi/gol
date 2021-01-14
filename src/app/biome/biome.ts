@@ -5,7 +5,8 @@ import {
   iterateGrid,
 } from "../grid/grid";
 import { Point } from "../grid/positions";
-import * as biomes from "./app/config/biome/biomes.json";
+import { BiomeTile } from "./biomeTile";
+import { biomes } from "./loader/biomeLoader";
 
 // biome id
 // current type id
@@ -39,7 +40,7 @@ interface NeighbourRequirements {
 }
 
 interface WaterRequirements {
-  distance: number;
+  level: number;
 }
 
 export interface BiomeTileType {
@@ -58,14 +59,14 @@ export interface Biome {
   waterRequirements: WaterRequirements;
 }
 
-const defaultTile = {
-  tileTypeId: null,
-  biome: null,
-  status: {
-    waterLevel: 123,
-    fertility: 1,
-  },
-};
+// const defaultTile = {
+//   tileTypeId: null,
+//   biome: null,
+//   status: {
+//     waterLevel: 123,
+//     fertility: 1,
+//   },
+// };
 
 const getBiomeById = (id: number) => {
   const biome = biomes.find((biome: Biome) => biome.id === id);
@@ -76,10 +77,10 @@ const getBiomeById = (id: number) => {
 };
 
 export const getBiomeTileData = (
-  grid: BiomeTileType[][],
+  grid: BiomeTile[][],
   point: Point,
   biome: Biome
-) => {
+): BiomeTile => {
   const tile = getFromGrid(point, grid);
 
   if (tile === null) {
@@ -96,8 +97,8 @@ export const getBiomeTileData = (
 const makeNewTile = (
   biome: Biome,
   point: Point,
-  grid: BiomeTileType[][]
-): BiomeTileType => {
+  grid: BiomeTile[][]
+): BiomeTile => {
   // const neighbours = getNeighbours(point, grid) as BiomeTileType[];
   // const count = [];
   // const collection = neighbours.reduce((accu, current) => {});
@@ -112,19 +113,19 @@ const makeNewTile = (
 };
 
 export const setBiomeTileType = (
-  biome: BiomeTileType[][],
+  biome: BiomeTile[][],
   point: Point,
-  data: BiomeTileType
-) => {
+  data: BiomeTile
+): BiomeTile[][] => {
   return addToGrid(biome, data, point.x);
 };
 
-export const processMoistureChange = (tile: BiomeTileType, biome: Biome) => {
+export const processMoistureChange = (tile: BiomeTile, biome: Biome) => {
   return;
 };
 
-export const tick = (grid: BiomeTileType[][]): BiomeTileType[][] => {
-  const newGrid: BiomeTileType[][] = [];
+export const tick = (grid: BiomeTileType[][]): BiomeTile[][] => {
+  const newGrid: BiomeTile[][] = [];
 
   iterateGrid((point) => {
     const tile = grid[point.x][point.y];

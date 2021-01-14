@@ -7,10 +7,12 @@ import {
   setBiomeTileType,
   getBiomeTileData,
   BiomeTileType,
+  Biome,
 } from "./app/biome/biome";
-import * as biomes from "./app/config/biome/biomes.json";
 import { getTypeById } from "./app/biome/type";
 import { Application, Graphics } from "pixi.js";
+import { BiomeTile } from "./app/biome/biomeTile";
+import { biomes } from "./app/biome/loader/biomeLoader";
 
 interface HexTile {
   hex: Graphics;
@@ -18,7 +20,7 @@ interface HexTile {
 }
 
 let grid: HexTile[][] = [];
-let biomeGrid: BiomeTileType[][] = [];
+let biomeGrid: BiomeTile[][] = [];
 
 export const gol = (app: Application) => {
   const layout = Layout(pointyLayout, Point(30, 30));
