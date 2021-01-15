@@ -116,6 +116,15 @@ export const gridToWorldPosition = (layout: Layout, point: Point) => {
   return Point(renderX, renderY);
 };
 
+const wrapToTile = (axisCord: number): number => {
+  if (axisCord > 1) {
+    return Math.floor(axisCord);
+  } else if (axisCord < -1) {
+    return (axisCord = Math.ceil(axisCord));
+  }
+
+  return 0;
+};
 
 /**
  * Based on the provided world position this function will return
@@ -127,9 +136,8 @@ export const gridToWorldPosition = (layout: Layout, point: Point) => {
  * @return {Point}  The grid location
  */
 export const worldPositionToGrid = (layout: Layout, point: Point) => {
-
-  let gridX = point.x ;
-  let gridY = point.y ;
+  let gridX = point.x;
+  let gridY = point.y;
 
   gridX -= getOffsetX();
   gridY -= getOffsetY();
@@ -137,10 +145,5 @@ export const worldPositionToGrid = (layout: Layout, point: Point) => {
   gridX /= (Math.sqrt(3) / 2) * getRadius();
   gridY /= (getRadius() / 4) * 3.0;
 
-  gridX /= 2;
-  gridY /= 2;
-
-  return Point(Math.floor(gridX), Math.floor(gridY));
+  return Point(wrapToTile(gridX), wrapToTile(gridY));
 };
-
-
