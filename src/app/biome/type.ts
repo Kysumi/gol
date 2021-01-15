@@ -1,4 +1,4 @@
-import types from "../config/biome/types.json";
+import types from "./loader/typeLoader";
 
 export interface TileType {
   id: number;

@@ -13,6 +13,7 @@ import { getTypeById } from "./app/biome/type";
 import { Application, Graphics, Renderer, Ticker } from "pixi.js";
 import { BiomeTile } from "./app/biome/biomeTile";
 import { biomes } from "./app/biome/loader/biomeLoader";
+import * as pixi from "pixi.js";
 
 import {drawDebug} from "./app/tools/debug";
 
@@ -69,22 +70,9 @@ export const gol = (app: Application) => {
     txt.position.y = y - 10;
 
     app.stage.addChild(txt);
-
-    //console.log(app.renderer.plugins.interaction.mouse.global);
   });
 
   ticker.start();
-  console.log(biomeGrid);
-
-  // const background = new Graphics();
-
-  // background.beginFill(0x989898);      
-  // background.lineStyle(5, 0xff0000)  
-  // background.drawRect(0, 0, 300, 200);
-  // background.endFill();
-  
-  // app.stage.addChild(background);
-
 };
 
 
