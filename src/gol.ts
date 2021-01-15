@@ -7,12 +7,14 @@ import {
   setBiomeTileType,
   getBiomeTileData,
   BiomeTileType,
-  Biome,
+  Biome
 } from "./app/biome/biome";
 import { getTypeById } from "./app/biome/type";
-import { Application, Graphics } from "pixi.js";
+import { Application, Graphics, Renderer, Ticker } from "pixi.js";
 import { BiomeTile } from "./app/biome/biomeTile";
 import { biomes } from "./app/biome/loader/biomeLoader";
+
+import {drawDebug} from "./app/tools/debug";
 
 interface HexTile {
   hex: Graphics;
@@ -21,8 +23,20 @@ interface HexTile {
 
 let grid: HexTile[][] = [];
 let biomeGrid: BiomeTile[][] = [];
+let mainApp: Application;
+let ticker = Ticker.shared;
 
 export const gol = (app: Application) => {
+  //for use inside ticker
+  mainApp = app;
+  ticker.maxFPS = 60;
+  ticker.autoStart = false;
+
+  // register debug tools
+  ticker.add(function(deltatime :number){        
+    drawDebug(app, ticker, app.renderer);
+  });
+
   const layout = Layout(pointyLayout, Point(30, 30));
   const biome = biomes[0];
 
@@ -55,10 +69,25 @@ export const gol = (app: Application) => {
     txt.position.y = y - 10;
 
     app.stage.addChild(txt);
+
+    //console.log(app.renderer.plugins.interaction.mouse.global);
   });
 
+  ticker.start();
   console.log(biomeGrid);
+
+  // const background = new Graphics();
+
+  // background.beginFill(0x989898);      
+  // background.lineStyle(5, 0xff0000)  
+  // background.drawRect(0, 0, 300, 200);
+  // background.endFill();
+  
+  // app.stage.addChild(background);
+
 };
+
+
 
 // const isAlive = (point) => {
 //   const neighbours = getNeighbours(point, grid)

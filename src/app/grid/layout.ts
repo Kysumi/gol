@@ -115,3 +115,32 @@ export const gridToWorldPosition = (layout: Layout, point: Point) => {
 
   return Point(renderX, renderY);
 };
+
+
+/**
+ * Based on the provided world position this function will return
+ * a point in the grid location
+ *
+ * @param  {Layout} layout  The layout of the grid
+ * @param  {Point}  point   The world position
+ *
+ * @return {Point}  The grid location
+ */
+export const worldPositionToGrid = (layout: Layout, point: Point) => {
+
+  let gridX = point.x ;
+  let gridY = point.y ;
+
+  gridX -= getOffsetX();
+  gridY -= getOffsetY();
+
+  gridX /= (Math.sqrt(3) / 2) * getRadius();
+  gridY /= (getRadius() / 4) * 3.0;
+
+  gridX /= 2;
+  gridY /= 2;
+
+  return Point(Math.floor(gridX), Math.floor(gridY));
+};
+
+
