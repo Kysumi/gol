@@ -70,7 +70,9 @@ export interface BiomeTileType {
   neighboursRequired: NeighbourRequirements;
   waterRequirements: WaterRequirements;
   conditions: Conditions;
-  biomeId: number;
+  transferRate: TransferRate;
+  saturation: Saturation;
+  // biomeId: number;
 }
 
 export interface Biome {
@@ -112,11 +114,19 @@ const makeNewTile = (
   // const collection = neighbours.reduce((accu, current) => {});
 
   const tileTypeId = Math.floor(Math.random() * biome.types.length);
+  const tileType = biome.types[tileTypeId];
 
   const type = {
     biomeId: biome.id,
-    typeId: biome.types[tileTypeId].typeId,
-    currentState: biome.types[tileTypeId].conditions,
+    ...tileType,
+    currentState: {
+      humidity: 10,
+      temperature: 10,
+      waterLevel: 10,
+      fetility: 10,
+      moisture: 10,
+      heat: 10,
+    },
   };
 
   return type;

@@ -1,4 +1,7 @@
-import typeJson from "../../../../assets/biome/types.json";
+// import typeJson from "../../../../assets/biome/types.json";
+
+import typeJson from "../../../../../assets/biome/types.json";
+
 import { TileType } from "../type";
 import * as z from "zod";
 

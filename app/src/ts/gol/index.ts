@@ -1,21 +1,21 @@
-import { getHexObject, drawHexagon } from "./app/object/hexagon";
-import { debugTxt } from "./app/object/tileDebug";
-import { Layout, pointyLayout, gridToWorldPosition } from "./app/grid/layout";
-import { Point } from "./app/grid/positions";
-import { addToGrid, iterateGrid } from "./app/grid/grid";
+import { getHexObject, drawHexagon } from "./object/hexagon";
+import { debugTxt } from "./object/tileDebug";
+import { Layout, pointyLayout, gridToWorldPosition } from "./grid/layout";
+import { Point } from "./grid/positions";
+import { addToGrid, iterateGrid } from "./grid/grid";
 import {
   setBiomeTileType,
   getBiomeTileData,
   BiomeTileType,
-  Biome
-} from "./app/biome/biome";
-import { getTypeById } from "./app/biome/type";
+  Biome,
+} from "./biome/biome";
+import { getTypeById } from "./biome/type";
 import { Application, Graphics, Renderer, Ticker } from "pixi.js";
-import { BiomeTile } from "./app/biome/biomeTile";
-import { biomes } from "./app/biome/loader/biomeLoader";
+import { BiomeTile } from "./biome/biomeTile";
+import { biomes } from "./biome/loader/biomeLoader";
 import * as pixi from "pixi.js";
 
-import {drawDebug} from "./app/tools/debug";
+import { drawDebug } from "./tools/debug";
 
 interface HexTile {
   hex: Graphics;
@@ -34,7 +34,7 @@ export const gol = (app: Application) => {
   ticker.autoStart = false;
 
   // register debug tools
-  ticker.add(function(deltatime :number){        
+  ticker.add(function (deltatime: number) {
     drawDebug(app, ticker, app.renderer);
   });
 
@@ -74,8 +74,6 @@ export const gol = (app: Application) => {
 
   ticker.start();
 };
-
-
 
 // const isAlive = (point) => {
 //   const neighbours = getNeighbours(point, grid)
