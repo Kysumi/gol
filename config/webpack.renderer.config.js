@@ -55,7 +55,11 @@ module.exports = {
       // { test: /\.ts$/, use: ["awesome-typescript-loader"] },
       { test: /\.tsx?$/, loader: "ts-loader", exclude: "/node_modules/" },
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-      { test: /\.js$/, enforce: "pre", use: "source-map-loader" },
+      {
+        test: /\.js$/,
+        enforce: "pre",
+        use: "source-map-loader",
+      },
     ],
   },
   target: "electron-renderer",

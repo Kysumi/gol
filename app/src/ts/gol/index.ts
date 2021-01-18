@@ -3,12 +3,7 @@ import { debugTxt } from "./object/tileDebug";
 import { Layout, pointyLayout, gridToWorldPosition } from "./grid/layout";
 import { Point } from "./grid/positions";
 import { addToGrid, iterateGrid } from "./grid/grid";
-import {
-  setBiomeTileType,
-  getBiomeTileData,
-  BiomeTileType,
-  Biome,
-} from "./biome/biome";
+import { setBiomeTileType, getBiomeTileData } from "./biome/biome";
 import { getTypeById } from "./biome/type";
 import { Application, Graphics, Renderer, Ticker } from "pixi.js";
 import { BiomeTile } from "./biome/biomeTile";

@@ -6,7 +6,8 @@ import {
 } from "../grid/grid";
 import { Point } from "../grid/positions";
 import { BiomeTile } from "./biomeTile";
-import { biomes } from "./loader/biomeLoader";
+import { BiomeConfig, biomes } from "./loader/biomeLoader";
+import { BiomeTileConfig } from "./loader/biomeTileLoader";
 import { processMoistureChange } from "./process/moisture";
 import { getTypeById } from "./type";
 
@@ -65,25 +66,25 @@ export interface Saturation {
  * If you are looking for the current state of the tile it is
  * in the BiomeTile
  */
-export interface BiomeTileType {
-  typeId: number;
-  neighboursRequired: NeighbourRequirements;
-  waterRequirements: WaterRequirements;
-  conditions: Conditions;
-  transferRate: TransferRate;
-  saturation: Saturation;
-  // biomeId: number;
-}
+// export interface BiomeTileType {
+//   typeId: number;
+//   neighboursRequired: NeighbourRequirements;
+//   waterRequirements: WaterRequirements;
+//   conditions: Conditions;
+//   transferRate: TransferRate;
+//   saturation: Saturation;
+//   // biomeId: number;
+// }
 
-export interface Biome {
-  id: number;
-  name: string;
-  conditions: Conditions;
-  types: BiomeTileType[];
-}
+// export interface Biome {
+//   id: number;
+//   name: string;
+//   conditions: Conditions;
+//   types: BiomeTileType[];
+// }
 
 const getBiomeById = (id: number) => {
-  const biome = biomes.find((biome: Biome) => biome.id === id);
+  const biome = biomes.find((biome: BiomeConfig) => biome.id === id);
   if (biome === undefined) {
     throw new Error(`Failed to find ${id} as a biome ID`);
   }
@@ -93,7 +94,7 @@ const getBiomeById = (id: number) => {
 export const getBiomeTileData = (
   grid: BiomeTile[][],
   point: Point,
-  biome: Biome
+  biome: BiomeConfig
 ): BiomeTile => {
   const tile = getFromGrid(point, grid);
 
@@ -105,7 +106,7 @@ export const getBiomeTileData = (
 };
 
 const makeNewTile = (
-  biome: Biome,
+  biome: BiomeConfig,
   point: Point,
   grid: BiomeTile[][]
 ): BiomeTile => {
@@ -113,8 +114,8 @@ const makeNewTile = (
   // const count = [];
   // const collection = neighbours.reduce((accu, current) => {});
 
-  const tileTypeId = Math.floor(Math.random() * biome.types.length);
-  const tileType = biome.types[tileTypeId];
+  const tileTypeId = Math.floor(Math.random() * biome.tiles.length);
+  const tileType = biome.tiles[tileTypeId];
 
   const type = {
     biomeId: biome.id,
@@ -140,9 +141,12 @@ export const setBiomeTileType = (
   return addToGrid(biome, data, point.x);
 };
 
-const getBiomeTileTypeById = (id: number, biome: Biome): BiomeTileType => {
-  const tileType = biome.types.find(
-    (tileType: BiomeTileType) => tileType.typeId === id
+const getBiomeTileTypeById = (
+  id: number,
+  biome: BiomeConfig
+): BiomeTileConfig => {
+  const tileType = biome.tiles.find(
+    (tileType: BiomeTileConfig) => tileType.typeId === id
   );
 
   if (tileType === undefined) {

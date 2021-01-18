@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const HtmlPlugin = require("html-webpack-plugin");
 // const { CheckerPlugin, TsConfigPathsPlugin } = require('awesome-typescript-loader');
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const path = require("path");
 
 const { mainPath, target, isDev } = require("./env");
 
@@ -34,7 +35,11 @@ module.exports = {
       { test: /\.tsx?$/, loader: "ts-loader", exclude: "/node_modules/" },
 
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-      { test: /\.js$/, enforce: "pre", use: "source-map-loader" },
+      {
+        test: /\.js$/,
+        enforce: "pre",
+        use: "source-map-loader",
+      },
     ],
   },
   target: "electron-main",
