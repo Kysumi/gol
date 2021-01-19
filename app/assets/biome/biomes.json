@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "name": "grassy",
+    "conditions": {
+      "humidity": 10,
+      "temperature": 10,
+      "waterLevel": 50,
+      "fetility": 50
+    },
+    "tiles": [
+      {
+        "typeId": 1,
+        "conditions": {
+          "humidity": 10,
+          "temperature": 10,
+          "waterLevel": 50,
+          "fetility": 50
+        },
+        "transferRate": {
+          "heat": 10,
+          "water": 10,
+          "moisture": 10
+        },
+        "saturation": {
+          "heat": 10,
+          "water": 10,
+          "fetility": 10
+        }
+      },
+      {
+        "typeId": 2,
+        "conditions": {
+          "humidity": 10,
+          "temperature": 10,
+          "waterLevel": 50,
+          "fetility": 50
+        },
+        "transferRate": {
+          "heat": 10,
+          "water": 10,
+          "moisture": 10
+        },
+        "saturation": {
+          "heat": 10,
+          "water": 10,
+          "fetility": 10
+        }
+      },
+      {
+        "typeId": 3,
+        "conditions": {
+          "humidity": 10,
+          "temperature": 10,
+          "waterLevel": 50,
+          "fetility": 50
+        },
+        "transferRate": {
+          "heat": 10,
+          "water": 10,
+          "moisture": 10
+        },
+        "saturation": {
+          "heat": 10,
+          "water": 10,
+          "fetility": 10
+        }
+      },
+      {
+        "typeId": 4,
+        "conditions": {
+          "humidity": 10,
+          "temperature": 10,
+          "waterLevel": 50,
+          "fetility": 50
+        },
+        "transferRate": {
+          "heat": 10,
+          "water": 10,
+          "moisture": 10
+        },
+        "saturation": {
+          "heat": 10,
+          "water": 10,
+          "fetility": 10
+        }
+      }
+    ]
+  }
+]

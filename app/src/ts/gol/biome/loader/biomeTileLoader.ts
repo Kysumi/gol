@@ -6,7 +6,7 @@ const TransferRateValidator = z.object({
   moisture: z.number(),
 });
 
-const ConditionValidator = z.object({
+export const ConditionValidator = z.object({
   humidity: z.number(),
   temperature: z.number(),
   waterLevel: z.number(),
