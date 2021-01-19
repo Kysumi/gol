@@ -8,7 +8,8 @@
     "baseUrl": "localhost:3000",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "strictNullChecks": true
   },
   "include": ["./app/src/ts/**/*"]
 }

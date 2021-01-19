@@ -15,17 +15,16 @@ export type BiomeConfig = z.infer<typeof BiomeValidator>;
 const loadBiomes = (): BiomeConfig[] => {
   const biomes: BiomeConfig[] = [];
 
-  for (const [key, value] of Object.entries(biomesJson)) {
+  for (const [key, value] of Object.entries(biomesJson["default"])) {
     try {
-      BiomeValidator.parse(value);
+      const biome = BiomeValidator.parse(value);
+      biomes.push(biome);
     } catch (err) {
       if (err instanceof z.ZodError) {
-        console.error(err.errors, value);
+        console.error(err.flatten(), value);
       }
     }
   }
-
-  console.log(biomes);
 
   return biomes;
 };
