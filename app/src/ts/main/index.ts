@@ -1,10 +1,12 @@
-import { app, BrowserWindow, Menu } from 'electron';
+import { app, BrowserWindow, Menu } from "electron";
 
 let win;
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === "development";
 
-app.on('ready', () => {
+app.on("ready", () => {
   win = new BrowserWindow();
-  const url = isDev ? 'http://localhost:3000' : `file://${__dirname}/index.html`;
+  const url = isDev
+    ? "http://localhost:3000"
+    : `file://${__dirname}/index.html`;
   win.loadURL(url);
 });
