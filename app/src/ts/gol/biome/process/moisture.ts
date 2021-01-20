@@ -8,7 +8,10 @@ export const processMoistureChange = (
   point: Point,
   biome: BiomeConfig,
   tileType: BiomeTileConfig,
-  neighbours: BiomeTile[][]
+  neighbours: BiomeTile[]
 ) => {
+  const moistureRate = tile.transferRate.moisture;
+  const biomeTemp = biome.conditions.temperature;
+
   return;
 };

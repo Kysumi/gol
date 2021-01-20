@@ -102,7 +102,13 @@ export const tick = (grid: BiomeTile[][]): BiomeTile[][] => {
     const tileType = getBiomeTileTypeById(tile.typeId, biome);
     const neighbours = getNeighbours(point, grid);
 
-    const moisture = processMoistureChange(tile, point, biome, tileType, grid);
+    const moisture = processMoistureChange(
+      tile,
+      point,
+      biome,
+      tileType,
+      neighbours
+    );
   });
 
   return newGrid;
