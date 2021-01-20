@@ -1,4 +1,3 @@
-// import { Biome } from "../biome";
 import * as biomesJson from "../../../../../assets/biome/biomes.json";
 import * as z from "zod";
 import { BiomeTileValidator, ConditionValidator } from "./biomeTileLoader";

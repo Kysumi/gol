@@ -1,4 +1,3 @@
-import { getNeighbours } from "../../grid/grid";
 import { Point } from "../../grid/positions";
 import { BiomeTile } from "../biomeTile";
 import { BiomeConfig } from "../loader/biomeLoader";

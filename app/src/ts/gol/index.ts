@@ -2,19 +2,17 @@ import { getHexObject, drawHexagon } from "./object/hexagon";
 import { debugTxt } from "./object/tileDebug";
 import { Layout, pointyLayout, gridToWorldPosition } from "./grid/layout";
 import { Point } from "./grid/positions";
-import { addToGrid, iterateGrid } from "./grid/grid";
+import { addToGrid, getFromGrid, iterateGrid } from "./grid/grid";
 import { setBiomeTileType, getBiomeTileData } from "./biome/biome";
 import { getTypeById } from "./biome/type";
-import { Application, Graphics, Renderer, Ticker } from "pixi.js";
+import { Application, Graphics, Ticker } from "pixi.js";
 import { BiomeTile } from "./biome/biomeTile";
 import { biomes } from "./biome/loader/biomeLoader";
-import * as pixi from "pixi.js";
 
 import { drawDebug } from "./tools/debug";
 
 interface HexTile {
   hex: Graphics;
-  alive: boolean;
 }
 
 let grid: HexTile[][] = [];
@@ -37,16 +35,18 @@ export const gol = (app: Application) => {
   const biome = biomes[0];
 
   iterateGrid((point: Point) => {
+    const biomeTileData = getBiomeTileData(biomeGrid, point, biome);
+    biomeGrid = setBiomeTileType(biomeGrid, point, biomeTileData);
+  });
+
+  iterateGrid((point: Point) => {
     const hex = getHexObject();
     const { x, y } = gridToWorldPosition(layout, point);
 
     hex.x = x;
     hex.y = y;
 
-    const isAlive = Math.floor(Math.random() * 10) < 3;
-
-    const biomeTileData = getBiomeTileData(biomeGrid, point, biome);
-    biomeGrid = setBiomeTileType(biomeGrid, point, biomeTileData);
+    const biomeTileData = getFromGrid(point, biomeGrid);
     const tileType = getTypeById(biomeTileData.typeId);
 
     drawHexagon(layout, hex, tileType.color);
@@ -55,7 +55,6 @@ export const gol = (app: Application) => {
 
     const tileObject = {
       hex: hex,
-      alive: isAlive,
     };
 
     grid = addToGrid(grid, tileObject, point.x);
