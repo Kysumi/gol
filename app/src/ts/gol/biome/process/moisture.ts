@@ -21,6 +21,10 @@ const processWaterMovement = (tile: BiomeTile, neighbours: BiomeTile[]) => {
   // );
 
   const output = neighbours.map((neighbour: BiomeTile) => {
+    if (neighbour == null) {
+      return neighbour;
+    }
+
     const level = neighbour.conditions.waterLevel;
 
     if (level > currentLevel) {
