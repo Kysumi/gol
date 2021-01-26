@@ -31,4 +31,4 @@ const loadBiomes = (): BiomeConfig[] => {
 export default loadBiomes();
 
 // Quick fix till we implment propper json loading with type checking and strict enforcement on data
-export const biomes = (biomesJson as unknown) as BiomeConfig[];
+// export const biomes = (biomesJson as unknown) as BiomeConfig[];

@@ -11,28 +11,39 @@ import { BiomeTileConfig } from "../loader/biomeTileLoader";
 // it is being processed as a neighbour
 
 const processWaterMovement = (tile: BiomeTile, neighbours: BiomeTile[]) => {
-  const currentLevel = tile.conditions.waterLevel;
+  let currentLevel = tile.conditions.waterLevel;
 
-  const higher = neighbours.filter(
-    (neighbour) => neighbour.conditions.waterLevel > currentLevel
-  );
-  const lower = neighbours.filter(
-    (neighbour) => neighbour.conditions.waterLevel < currentLevel
-  );
+  // const higher = neighbours.filter(
+  //   (neighbour) => neighbour.conditions.waterLevel > currentLevel
+  // );
+  // const lower = neighbours.filter(
+  //   (neighbour) => neighbour.conditions.waterLevel < currentLevel
+  // );
 
-  const getMovement = (neighbour: BiomeTile) => {
+  const output = neighbours.map((neighbour: BiomeTile) => {
     const level = neighbour.conditions.waterLevel;
-    const force = neighbour.transferRate.water;
 
-    const difference = level - currentLevel;
+    if (level > currentLevel) {
+      const force = neighbour.transferRate.water;
+      const difference = level - currentLevel;
+      currentLevel = difference * force;
+    } else {
+      const force = tile.transferRate.water;
+      const difference = currentLevel - level;
 
-    return {
-      amount: difference * force,
-    };
-  };
+      neighbour.conditions = {
+        ...neighbour.conditions,
+        waterLevel: difference * force,
+      };
+    }
 
-  const positiveEffect = higher.map(getMovement);
-  const negativeEffect = lower.map(getMovement);
+    return neighbour;
+  });
+
+  console.log(output);
+
+  // const positiveEffect = higher.map(getMovement);
+  // const negativeEffect = lower.map(getMovement);
 };
 
 export const processMoistureChange = (
@@ -42,6 +53,8 @@ export const processMoistureChange = (
   tileType: BiomeTileConfig,
   neighbours: BiomeTile[]
 ) => {
+  processWaterMovement(tile, neighbours);
+
   const moistureRate = tile.transferRate.moisture;
   const biomeTemp = biome.conditions.temperature;
 

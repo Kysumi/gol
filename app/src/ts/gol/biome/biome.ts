@@ -6,7 +6,7 @@ import {
 } from "../grid/grid";
 import { Point } from "../grid/positions";
 import { BiomeTile } from "./biomeTile";
-import { BiomeConfig, biomes } from "./loader/biomeLoader";
+import biomes, { BiomeConfig } from "./loader/biomeLoader";
 import { BiomeTileConfig } from "./loader/biomeTileLoader";
 import { processMoistureChange } from "./process/moisture";
 

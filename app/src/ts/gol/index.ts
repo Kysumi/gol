@@ -3,11 +3,11 @@ import { debugTxt } from "./object/tileDebug";
 import { Layout, pointyLayout, gridToWorldPosition } from "./grid/layout";
 import { Point } from "./grid/positions";
 import { addToGrid, getFromGrid, iterateGrid } from "./grid/grid";
-import { setBiomeTileType, getBiomeTileData } from "./biome/biome";
+import { setBiomeTileType, getBiomeTileData, tick } from "./biome/biome";
 import { getTypeById } from "./biome/type";
 import { Application, Graphics, Ticker } from "pixi.js";
 import { BiomeTile } from "./biome/biomeTile";
-import { biomes } from "./biome/loader/biomeLoader";
+import biomes from "./biome/loader/biomeLoader";
 
 import { drawDebug } from "./tools/debug";
 
@@ -68,6 +68,8 @@ export const gol = (app: Application) => {
 
   ticker.start();
 };
+
+setTimeout(() => tick(biomeGrid), 1000);
 
 // const isAlive = (point) => {
 //   const neighbours = getNeighbours(point, grid)
