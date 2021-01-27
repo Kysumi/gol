@@ -50,4 +50,7 @@ module.exports = {
   },
   target: "electron-main",
   // target: "browserslist:modern",
+  devServer: {
+    stats: "errors-only",
+  },
 };

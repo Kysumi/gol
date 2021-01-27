@@ -69,4 +69,7 @@ module.exports = {
     ],
   },
   target: "electron-renderer",
+  devServer: {
+    stats: "errors-only",
+  },
 };
