@@ -66,7 +66,7 @@ export const gol = (app: Application) => {
     app.stage.addChild(txt);
   });
 
-  ticker.start();
+  // ticker.start();
 };
 
 setTimeout(() => tick(biomeGrid), 1000);

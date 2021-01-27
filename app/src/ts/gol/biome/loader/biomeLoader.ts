@@ -5,7 +5,7 @@ import { BiomeTileValidator, ConditionValidator } from "./biomeTileLoader";
 const json = (biomesJson as any)["default"];
 
 const BiomeValidator = z.object({
-  id: z.number(),
+  id: z.string(),
   name: z.string(),
   tiles: z.array(BiomeTileValidator),
   conditions: ConditionValidator,

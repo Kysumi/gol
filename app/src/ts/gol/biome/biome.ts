@@ -20,7 +20,7 @@ import { processMoistureChange } from "./process/moisture";
 // types belong to one or more biomes
 // the biome is responsible for processing the tiles type and data
 
-const getBiomeById = (id: number) => {
+const getBiomeById = (id: string) => {
   const biome = biomes.find((biome: BiomeConfig) => biome.id === id);
   if (biome === undefined) {
     throw new Error(`Failed to find ${id} as a biome ID`);
@@ -82,7 +82,7 @@ export const setBiomeTileType = (
 };
 
 const getBiomeTileTypeById = (
-  id: number,
+  id: string,
   biome: BiomeConfig
 ): BiomeTileConfig => {
   const tileType = biome.tiles.find(

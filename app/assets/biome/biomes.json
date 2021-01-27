@@ -1,7 +1,7 @@
 [
   {
-    "id": 1,
-    "name": "grassy",
+    "id": "grassy",
+    "name": "Default Grass Biome",
     "conditions": {
       "humidity": 10,
       "temperature": 10,
@@ -10,11 +10,49 @@
     },
     "tiles": [
       {
-        "typeId": 1,
+        "typeId": "grass",
         "conditions": {
           "humidity": 10,
           "temperature": 10,
-          "waterLevel": 50,
+          "waterLevel": 12,
+          "fetility": 50
+        },
+        "transferRate": {
+          "heat": 0.1,
+          "water": 0.6,
+          "moisture": 0.1
+        },
+        "saturation": {
+          "heat": 10,
+          "water": 10,
+          "fetility": 10
+        }
+      },
+      {
+        "typeId": "dirt",
+        "conditions": {
+          "humidity": 10,
+          "temperature": 10,
+          "waterLevel": 30,
+          "fetility": 50
+        },
+        "transferRate": {
+          "heat": 0.1,
+          "water": 0.5,
+          "moisture": 0.1
+        },
+        "saturation": {
+          "heat": 10,
+          "water": 10,
+          "fetility": 10
+        }
+      },
+      {
+        "typeId": "rock",
+        "conditions": {
+          "humidity": 10,
+          "temperature": 10,
+          "waterLevel": 1,
           "fetility": 50
         },
         "transferRate": {
@@ -29,54 +67,16 @@
         }
       },
       {
-        "typeId": 2,
+        "typeId": "water",
         "conditions": {
           "humidity": 10,
           "temperature": 10,
-          "waterLevel": 50,
+          "waterLevel": 100,
           "fetility": 50
         },
         "transferRate": {
           "heat": 0.1,
-          "water": 0.1,
-          "moisture": 0.1
-        },
-        "saturation": {
-          "heat": 10,
-          "water": 10,
-          "fetility": 10
-        }
-      },
-      {
-        "typeId": 3,
-        "conditions": {
-          "humidity": 10,
-          "temperature": 10,
-          "waterLevel": 50,
-          "fetility": 50
-        },
-        "transferRate": {
-          "heat": 0.1,
-          "water": 0.1,
-          "moisture": 0.1
-        },
-        "saturation": {
-          "heat": 10,
-          "water": 10,
-          "fetility": 10
-        }
-      },
-      {
-        "typeId": 4,
-        "conditions": {
-          "humidity": 10,
-          "temperature": 10,
-          "waterLevel": 50,
-          "fetility": 50
-        },
-        "transferRate": {
-          "heat": 0.1,
-          "water": 0.1,
+          "water": 1,
           "moisture": 0.1
         },
         "saturation": {

@@ -10,44 +10,74 @@ import { BiomeTileConfig } from "../loader/biomeTileLoader";
 // means that it will be pulled from the old state and place into the buffer when
 // it is being processed as a neighbour
 
+const pushIntoTile = (target: BiomeTile, source: BiomeTile) => {
+  const targetLevel = target.conditions.waterLevel;
+  const sourceLevel = source.conditions.waterLevel;
+
+  const targetResistance = target.transferRate.water;
+  const sourcePower = source.transferRate.water;
+
+  const difference = sourceLevel - targetLevel;
+
+  const movement = difference * sourcePower * targetResistance;
+
+  target.conditions = {
+    ...target.conditions,
+    waterLevel: targetLevel + movement,
+  };
+
+  source.conditions = {
+    ...source.conditions,
+    waterLevel: sourceLevel - movement,
+  };
+
+  console.log(target.conditions, movement);
+
+  return {
+    target,
+    source,
+  };
+};
+
+const causeEffect = (current: BiomeTile, neighbour: BiomeTile) => {
+  const currentLevel = current.conditions.waterLevel;
+  const neighbourLevel = neighbour.conditions.waterLevel;
+
+  if (neighbourLevel > currentLevel) {
+    const output = pushIntoTile(current, neighbour);
+
+    return {
+      current: output.target,
+      neighbour: output.source,
+    };
+  } else {
+    const output = pushIntoTile(neighbour, current);
+
+    return {
+      current: output.source,
+      neighbour: output.target,
+    };
+  }
+};
+
 const processWaterMovement = (tile: BiomeTile, neighbours: BiomeTile[]) => {
-  let currentLevel = tile.conditions.waterLevel;
+  let updatedTile = tile;
 
-  // const higher = neighbours.filter(
-  //   (neighbour) => neighbour.conditions.waterLevel > currentLevel
-  // );
-  // const lower = neighbours.filter(
-  //   (neighbour) => neighbour.conditions.waterLevel < currentLevel
-  // );
-
-  const output = neighbours.map((neighbour: BiomeTile) => {
-    if (neighbour == null) {
-      return neighbour;
+  const updatedNeighbours = neighbours.map((neighbour: BiomeTile) => {
+    if (neighbour === null) {
+      return null;
     }
 
-    const level = neighbour.conditions.waterLevel;
+    const output = causeEffect(updatedTile, neighbour);
 
-    if (level > currentLevel) {
-      const force = neighbour.transferRate.water;
-      const difference = level - currentLevel;
-      currentLevel = difference * force;
-    } else {
-      const force = tile.transferRate.water;
-      const difference = currentLevel - level;
-
-      neighbour.conditions = {
-        ...neighbour.conditions,
-        waterLevel: difference * force,
-      };
-    }
-
-    return neighbour;
+    updatedTile = output.current;
+    return output.neighbour;
   });
 
-  console.log(output);
-
-  // const positiveEffect = higher.map(getMovement);
-  // const negativeEffect = lower.map(getMovement);
+  return {
+    updatedTile: updatedTile,
+    neighbours: updatedNeighbours,
+  };
 };
 
 export const processMoistureChange = (
@@ -57,7 +87,9 @@ export const processMoistureChange = (
   tileType: BiomeTileConfig,
   neighbours: BiomeTile[]
 ) => {
-  processWaterMovement(tile, neighbours);
+  const alter = processWaterMovement(tile, neighbours);
+
+  console.log(alter);
 
   const moistureRate = tile.transferRate.moisture;
   const biomeTemp = biome.conditions.temperature;

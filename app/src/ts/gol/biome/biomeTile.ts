@@ -8,7 +8,7 @@ const Point = z.object({
 
 const BiomeTileConfig = z
   .object({
-    biomeId: z.number(),
+    biomeId: z.string(),
     point: Point,
   })
   .merge(BiomeTileValidator);

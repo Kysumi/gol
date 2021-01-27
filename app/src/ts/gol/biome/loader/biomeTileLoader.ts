@@ -20,7 +20,7 @@ const Saturation = z.object({
 });
 
 export const BiomeTileValidator = z.object({
-  typeId: z.number(),
+  typeId: z.string(),
   conditions: ConditionValidator,
   transferRate: TransferRateValidator,
   saturation: Saturation,
