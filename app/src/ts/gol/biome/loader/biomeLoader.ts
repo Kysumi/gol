@@ -2,6 +2,8 @@ import * as biomesJson from "../../../../../assets/biome/biomes.json";
 import * as z from "zod";
 import { BiomeTileValidator, ConditionValidator } from "./biomeTileLoader";
 
+const json = (biomesJson as any)["default"];
+
 const BiomeValidator = z.object({
   id: z.number(),
   name: z.string(),
@@ -14,7 +16,7 @@ export type BiomeConfig = z.infer<typeof BiomeValidator>;
 const loadBiomes = (): BiomeConfig[] => {
   const biomes: BiomeConfig[] = [];
 
-  for (const [key, value] of Object.entries(biomesJson["default"])) {
+  for (const [key, value] of Object.entries(json)) {
     try {
       const biome = BiomeValidator.parse(value);
       biomes.push(biome);
