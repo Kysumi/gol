@@ -98,21 +98,35 @@ const getBiomeTileTypeById = (
 
 export const tick = (grid: BiomeTile[][]): BiomeTile[][] => {
   const newGrid: BiomeTile[][] = [];
+  console.log("AHGASDDASD");
+  const tile = grid[1][1];
+  const biome = getBiomeById(tile.biomeId);
+  const neih = getNeighbours(Point(1, 1), grid);
 
-  iterateGrid((point) => {
-    const tile = grid[point.x][point.y];
-    const biome = getBiomeById(tile.biomeId);
-    const tileType = getBiomeTileTypeById(tile.typeId, biome);
-    const neighbours = getNeighbours(point, grid);
+  console.log(neih);
 
-    const moisture = processMoistureChange(
-      tile,
-      point,
-      biome,
-      tileType,
-      neighbours
-    );
-  });
+  const moisture = processMoistureChange(
+    tile,
+    Point(1, 1),
+    biome,
+    getBiomeTileTypeById(tile.typeId, biome),
+    neih
+  );
+
+  // iterateGrid((point) => {
+  //   const tile = grid[point.x][point.y];
+  //   const biome = getBiomeById(tile.biomeId);
+  //   const tileType = getBiomeTileTypeById(tile.typeId, biome);
+  //   const neighbours = getNeighbours(point, grid);
+
+  //   const moisture = processMoistureChange(
+  //     tile,
+  //     point,
+  //     biome,
+  //     tileType,
+  //     neighbours
+  //   );
+  // });
 
   return newGrid;
 };

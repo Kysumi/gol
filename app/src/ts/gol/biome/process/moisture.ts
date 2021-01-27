@@ -31,7 +31,13 @@ const pushIntoTile = (target: BiomeTile, source: BiomeTile) => {
     waterLevel: sourceLevel - movement,
   };
 
-  console.log(target.conditions, movement);
+  console.log(
+    target.conditions.waterLevel,
+    source.conditions.waterLevel,
+    movement,
+    target.typeId,
+    source.typeId
+  );
 
   return {
     target,

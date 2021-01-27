@@ -66,10 +66,9 @@ export const gol = (app: Application) => {
     app.stage.addChild(txt);
   });
 
+  tick(biomeGrid);
   // ticker.start();
 };
-
-setTimeout(() => tick(biomeGrid), 1000);
 
 // const isAlive = (point) => {
 //   const neighbours = getNeighbours(point, grid)
