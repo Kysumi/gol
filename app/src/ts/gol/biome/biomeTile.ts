@@ -1,9 +1,15 @@
 import { BiomeTileValidator } from "./loader/biomeTileLoader";
 import * as z from "zod";
 
+const Point = z.object({
+  x: z.number(),
+  y: z.number(),
+});
+
 const BiomeTileConfig = z
   .object({
     biomeId: z.number(),
+    point: Point,
   })
   .merge(BiomeTileValidator);
 

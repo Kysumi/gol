@@ -65,6 +65,9 @@ const makeNewTile = (
       moisture: 10,
       heat: 10,
     },
+    point: {
+      ...point,
+    },
   };
 
   return type;
