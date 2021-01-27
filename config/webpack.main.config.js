@@ -36,6 +36,7 @@ module.exports = {
       // { test: /\.ts$/, use: ["awesome-typescript-loader"] },
       {
         test: /\.tsx?$/,
+        exclude: [/node_modules/],
         loader: "ts-loader",
         options: { transpileOnly: true },
       },
@@ -44,6 +45,7 @@ module.exports = {
       {
         test: /\.js$/,
         enforce: "pre",
+        exclude: [/node_modules/],
         use: "source-map-loader",
       },
     ],
@@ -51,6 +53,6 @@ module.exports = {
   target: "electron-main",
   // target: "browserslist:modern",
   devServer: {
-    stats: "errors-only",
+    stats: "minimal",
   },
 };

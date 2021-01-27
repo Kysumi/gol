@@ -58,18 +58,20 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: "ts-loader",
+        exclude: [/node_modules/],
         options: { transpileOnly: true },
       },
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       {
         test: /\.js$/,
         enforce: "pre",
+        exclude: [/node_modules/],
         use: "source-map-loader",
       },
     ],
   },
   target: "electron-renderer",
   devServer: {
-    stats: "errors-only",
+    stats: "minimal",
   },
 };
