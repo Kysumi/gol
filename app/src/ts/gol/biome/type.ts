@@ -1,12 +1,6 @@
-import types from "./loader/typeLoader";
+import types, { TileType } from "./loader/typeLoader";
 
-export interface TileType {
-  id: number;
-  name: string;
-  color: string;
-}
-
-export const getTypeById = (id: number): TileType => {
+export const getTypeById = (id: string): TileType => {
   const type = types.find((type: TileType) => type.id === id);
 
   if (type === undefined) {

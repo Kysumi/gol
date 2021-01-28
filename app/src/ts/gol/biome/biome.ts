@@ -6,9 +6,9 @@ import {
 } from "../grid/grid";
 import { Point } from "../grid/positions";
 import { BiomeTile } from "./biomeTile";
-import { biomes } from "./loader/biomeLoader";
+import biomes, { BiomeConfig } from "./loader/biomeLoader";
+import { BiomeTileConfig } from "./loader/biomeTileLoader";
 import { processMoistureChange } from "./process/moisture";
-import { getTypeById } from "./type";
 
 // biome id
 // current type id
@@ -20,70 +20,8 @@ import { getTypeById } from "./type";
 // types belong to one or more biomes
 // the biome is responsible for processing the tiles type and data
 
-// {
-// 	tileType: 1,
-// 	biome: 1,
-// 	status: {
-// 		moisture: 123,
-// 		fertility: 1,
-// 	}
-// }
-
-export interface Conditions {
-  humidity: number;
-  temperature: number;
-  waterLevel: number;
-  fetility: number;
-  moisture: number;
-  heat: number;
-}
-
-interface NeighbourRequirements {
-  min?: number;
-  max?: number;
-}
-
-interface WaterRequirements {
-  level: number;
-  moisture: number;
-}
-
-export interface TransferRate {
-  heat: number;
-  water: number;
-  moisture: number;
-}
-
-export interface Saturation {
-  heat: number;
-  water: number;
-}
-
-/**
- * Initial configuration based on the biomes rules
- *
- * If you are looking for the current state of the tile it is
- * in the BiomeTile
- */
-export interface BiomeTileType {
-  typeId: number;
-  neighboursRequired: NeighbourRequirements;
-  waterRequirements: WaterRequirements;
-  conditions: Conditions;
-  transferRate: TransferRate;
-  saturation: Saturation;
-  // biomeId: number;
-}
-
-export interface Biome {
-  id: number;
-  name: string;
-  conditions: Conditions;
-  types: BiomeTileType[];
-}
-
-const getBiomeById = (id: number) => {
-  const biome = biomes.find((biome: Biome) => biome.id === id);
+const getBiomeById = (id: string) => {
+  const biome = biomes.find((biome: BiomeConfig) => biome.id === id);
   if (biome === undefined) {
     throw new Error(`Failed to find ${id} as a biome ID`);
   }
@@ -93,7 +31,7 @@ const getBiomeById = (id: number) => {
 export const getBiomeTileData = (
   grid: BiomeTile[][],
   point: Point,
-  biome: Biome
+  biome: BiomeConfig
 ): BiomeTile => {
   const tile = getFromGrid(point, grid);
 
@@ -105,7 +43,7 @@ export const getBiomeTileData = (
 };
 
 const makeNewTile = (
-  biome: Biome,
+  biome: BiomeConfig,
   point: Point,
   grid: BiomeTile[][]
 ): BiomeTile => {
@@ -113,8 +51,8 @@ const makeNewTile = (
   // const count = [];
   // const collection = neighbours.reduce((accu, current) => {});
 
-  const tileTypeId = Math.floor(Math.random() * biome.types.length);
-  const tileType = biome.types[tileTypeId];
+  const tileTypeId = Math.floor(Math.random() * biome.tiles.length);
+  const tileType = biome.tiles[tileTypeId];
 
   const type = {
     biomeId: biome.id,
@@ -126,6 +64,9 @@ const makeNewTile = (
       fetility: 10,
       moisture: 10,
       heat: 10,
+    },
+    point: {
+      ...point,
     },
   };
 
@@ -140,9 +81,12 @@ export const setBiomeTileType = (
   return addToGrid(biome, data, point.x);
 };
 
-const getBiomeTileTypeById = (id: number, biome: Biome): BiomeTileType => {
-  const tileType = biome.types.find(
-    (tileType: BiomeTileType) => tileType.typeId === id
+const getBiomeTileTypeById = (
+  id: string,
+  biome: BiomeConfig
+): BiomeTileConfig => {
+  const tileType = biome.tiles.find(
+    (tileType: BiomeTileConfig) => tileType.typeId === id
   );
 
   if (tileType === undefined) {
@@ -154,15 +98,35 @@ const getBiomeTileTypeById = (id: number, biome: Biome): BiomeTileType => {
 
 export const tick = (grid: BiomeTile[][]): BiomeTile[][] => {
   const newGrid: BiomeTile[][] = [];
+  console.log("AHGASDDASD");
+  const tile = grid[1][1];
+  const biome = getBiomeById(tile.biomeId);
+  const neih = getNeighbours(Point(1, 1), grid);
 
-  iterateGrid((point) => {
-    const tile = grid[point.x][point.y];
-    const biome = getBiomeById(tile.biomeId);
-    const tileType = getBiomeTileTypeById(tile.typeId, biome);
-    const neighbours = getNeighbours(point, grid);
+  console.log(neih);
 
-    const moisture = processMoistureChange(tile, point, biome, tileType, grid);
-  });
+  const moisture = processMoistureChange(
+    tile,
+    Point(1, 1),
+    biome,
+    getBiomeTileTypeById(tile.typeId, biome),
+    neih
+  );
+
+  // iterateGrid((point) => {
+  //   const tile = grid[point.x][point.y];
+  //   const biome = getBiomeById(tile.biomeId);
+  //   const tileType = getBiomeTileTypeById(tile.typeId, biome);
+  //   const neighbours = getNeighbours(point, grid);
+
+  //   const moisture = processMoistureChange(
+  //     tile,
+  //     point,
+  //     biome,
+  //     tileType,
+  //     neighbours
+  //   );
+  // });
 
   return newGrid;
 };

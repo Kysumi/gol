@@ -30,6 +30,7 @@ export const getFromGrid = (point: Point, grid: any): any | null => {
 export const getNeighbours = (point: Point, grid: any) => {
   return directions.map((direction) => {
     const position = add(point, direction);
+    console.log(position);
     if (position.x < 0 || position.x >= grid.length) {
       return null;
     }

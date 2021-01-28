@@ -1,32 +1,26 @@
 [
   {
-    "id": 1,
-    "name": "grass",
+    "id": "grass",
     "color": "0x12e34a"
   },
   {
-    "id": 2,
-    "name": "dirt",
+    "id": "dirt",
     "color": "0xAF601A"
   },
   {
-    "id": 3,
-    "name": "rock",
+    "id": "rock",
     "color": "0x707B7C"
   },
   {
-    "id": 4,
-    "name": "water",
+    "id": "water",
     "color": "0x059FF1"
   },
   {
-    "id": 5,
-    "name": "sand",
+    "id": "sand",
     "color": "0xFFC300"
   },
   {
-    "id": 6,
-    "name": "gravel",
+    "id": "gravel",
     "color": "0x707B7C"
   }
 ]
