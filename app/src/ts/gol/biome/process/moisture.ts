@@ -37,13 +37,13 @@ const pushIntoTile = (target: BiomeTile, source: BiomeTile) => {
     },
   };
 
-  // console.log(
-  //   target.conditions.waterLevel,
-  //   source.conditions.waterLevel,
-  //   movement,
-  //   target.typeId,
-  //   source.typeId
-  // );
+  console.log(
+    target.conditions.waterLevel,
+    source.conditions.waterLevel,
+    movement,
+    target.typeId,
+    source.typeId
+  );
 
   return {
     target: modifiedTarget,

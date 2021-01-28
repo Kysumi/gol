@@ -119,13 +119,13 @@ const getNeighourTilesFromBuffer = (
 
 export const tick = (grid: BiomeTile[][]): BiomeTile[][] => {
   const buffer: BiomeTile[][] = [];
-  const tile = grid[1][1];
-
-  const biome = getBiomeById(tile.biomeId);
-  const neighbours = getNeighourTilesFromBuffer(grid, buffer, Point(1, 1));
 
   timeFunctionPerformance(() => {
     iterateGrid((point) => {
+      const tile = getFromGrid(point, grid);
+      const biome = getBiomeById(tile.biomeId);
+      const neighbours = getNeighourTilesFromBuffer(grid, buffer, Point(1, 1));
+
       processMoistureChange(
         tile,
         point,
