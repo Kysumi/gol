@@ -3,6 +3,8 @@ import {
   getNeighbours,
   getFromGrid,
   iterateGrid,
+  directions,
+  add,
 } from "../grid/grid";
 import { Point } from "../grid/positions";
 import { BiomeTile } from "./biomeTile";
@@ -96,21 +98,37 @@ const getBiomeTileTypeById = (
   return tileType;
 };
 
-export const tick = (grid: BiomeTile[][]): BiomeTile[][] => {
-  const newGrid: BiomeTile[][] = [];
-  console.log("AHGASDDASD");
-  const tile = grid[1][1];
-  const biome = getBiomeById(tile.biomeId);
-  const neih = getNeighbours(Point(1, 1), grid);
+const getNeighourTilesFromBuffer = (
+  grid: BiomeTile[][],
+  buffer: BiomeTile[][],
+  point: Point
+): BiomeTile[] => {
+  return directions.map((direction) => {
+    const neighbourPoint = add(point, direction);
 
-  console.log(neih);
+    const bufferTile = getFromGrid(neighbourPoint, buffer);
+
+    if (bufferTile) {
+      return bufferTile;
+    }
+
+    return getFromGrid(neighbourPoint, grid);
+  });
+};
+
+export const tick = (grid: BiomeTile[][]): BiomeTile[][] => {
+  const buffer: BiomeTile[][] = [];
+  const tile = grid[1][1];
+
+  const biome = getBiomeById(tile.biomeId);
+  const neighbours = getNeighourTilesFromBuffer(grid, buffer, Point(1, 1));
 
   const moisture = processMoistureChange(
     tile,
     Point(1, 1),
     biome,
     getBiomeTileTypeById(tile.typeId, biome),
-    neih
+    neighbours
   );
 
   // iterateGrid((point) => {
@@ -128,5 +146,5 @@ export const tick = (grid: BiomeTile[][]): BiomeTile[][] => {
   //   );
   // });
 
-  return newGrid;
+  return buffer;
 };
