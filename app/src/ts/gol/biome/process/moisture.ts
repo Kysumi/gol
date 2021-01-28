@@ -37,13 +37,13 @@ const pushIntoTile = (target: BiomeTile, source: BiomeTile) => {
     },
   };
 
-  console.log(
-    target.conditions.waterLevel,
-    source.conditions.waterLevel,
-    movement,
-    target.typeId,
-    source.typeId
-  );
+  // console.log(
+  //   target.conditions.waterLevel,
+  //   source.conditions.waterLevel,
+  //   movement,
+  //   target.typeId,
+  //   source.typeId
+  // );
 
   return {
     target: modifiedTarget,
@@ -100,8 +100,6 @@ export const processMoistureChange = (
   neighbours: BiomeTile[]
 ) => {
   const alter = processWaterMovement(tile, neighbours);
-
-  console.log(alter);
 
   const moistureRate = tile.transferRate.moisture;
   const biomeTemp = biome.conditions.temperature;
