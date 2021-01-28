@@ -21,14 +21,20 @@ const pushIntoTile = (target: BiomeTile, source: BiomeTile) => {
 
   const movement = difference * sourcePower * targetResistance;
 
-  target.conditions = {
-    ...target.conditions,
-    waterLevel: targetLevel + movement,
+  const modifiedTarget = {
+    ...target,
+    conditions: {
+      ...target.conditions,
+      waterLevel: targetLevel + movement,
+    },
   };
 
-  source.conditions = {
-    ...source.conditions,
-    waterLevel: sourceLevel - movement,
+  const modifedSource = {
+    ...source,
+    conditions: {
+      ...source.conditions,
+      waterLevel: sourceLevel - movement,
+    },
   };
 
   console.log(
@@ -40,8 +46,8 @@ const pushIntoTile = (target: BiomeTile, source: BiomeTile) => {
   );
 
   return {
-    target,
-    source,
+    target: modifiedTarget,
+    source: modifedSource,
   };
 };
 
