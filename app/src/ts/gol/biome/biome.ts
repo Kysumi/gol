@@ -7,6 +7,7 @@ import {
   add,
 } from "../grid/grid";
 import { Point } from "../grid/positions";
+import { timeFunctionPerformance } from "../tools/debug";
 import { BiomeTile } from "./biomeTile";
 import biomes, { BiomeConfig } from "./loader/biomeLoader";
 import { BiomeTileConfig } from "./loader/biomeTileLoader";
@@ -123,13 +124,23 @@ export const tick = (grid: BiomeTile[][]): BiomeTile[][] => {
   const biome = getBiomeById(tile.biomeId);
   const neighbours = getNeighourTilesFromBuffer(grid, buffer, Point(1, 1));
 
-  const moisture = processMoistureChange(
-    tile,
-    Point(1, 1),
-    biome,
-    getBiomeTileTypeById(tile.typeId, biome),
-    neighbours
-  );
+  timeFunctionPerformance(() => {
+    processMoistureChange(
+      tile,
+      Point(1, 1),
+      biome,
+      getBiomeTileTypeById(tile.typeId, biome),
+      neighbours
+    );
+  });
+
+  // const moisture = processMoistureChange(
+  //   tile,
+  //   Point(1, 1),
+  //   biome,
+  //   getBiomeTileTypeById(tile.typeId, biome),
+  //   neighbours
+  // );
 
   // iterateGrid((point) => {
   //   const tile = grid[point.x][point.y];

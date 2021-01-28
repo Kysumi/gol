@@ -89,3 +89,12 @@ export const drawDebug = (
     app.stage.addChild(drawGridLocation());
   }
 };
+
+export const timeFunctionPerformance = (func: any) => {
+  const start = window.performance.now();
+
+  func();
+
+  const end = window.performance.now();
+  console.log(`Execution time: ${end - start} ms`);
+};
