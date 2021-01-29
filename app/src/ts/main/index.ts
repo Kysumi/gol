@@ -1,10 +1,11 @@
 import { app, BrowserWindow, Menu } from "electron";
-import {consoleWindow} from '../gol/tools/console'
+import {createWindow, showWindow, registerWindow, hideWindow} from "../gol/tools/windowmanager"
+//import {consoleWindow} from '../gol/tools/console'
 
 const isDev = process.env.NODE_ENV === "development";
 
 let win: BrowserWindow;
-let debugWindow : BrowserWindow;
+//let debugWindow : BrowserWindow;
 
 
 //clean this later and add it to its own file?
@@ -32,7 +33,7 @@ let menu = Menu.buildFromTemplate([
       {
         label:'Console',
         click: function(){
-          debugWindow.show();
+          hideWindow("GOL");
         }
       }
       ]
@@ -48,5 +49,6 @@ app.on("ready", () => {
   win.loadURL(url);
   win.setMenu(menu);
   
-  debugWindow = consoleWindow();
+  createWindow("console");
+  registerWindow("GOL", win);
 });

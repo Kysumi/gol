@@ -1,0 +1,7 @@
+{
+    "title": "console",
+    "entrypoint" : "console.html",
+    "size": [800,600],
+    "show": false,
+    "hideOnClose": true
+}
