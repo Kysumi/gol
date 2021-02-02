@@ -134,12 +134,26 @@ const addOrUpdateBuffer = (
   ];
 };
 
+const attemptToGetTileFromBuffer = (
+  point: Point,
+  grid: BiomeTile[][],
+  buffer: BiomeTile[][]
+) => {
+  const bufferTile = getFromGrid(point, buffer);
+
+  if (bufferTile) {
+    return bufferTile;
+  }
+
+  return getFromGrid(point, grid);
+};
+
 export const tick = (grid: BiomeTile[][]): BiomeTile[][] => {
   let buffer: BiomeTile[][] = newArrayOfSize();
 
   timeFunctionPerformance(() => {
     iterateGrid((point) => {
-      const tile = getFromGrid(point, grid);
+      const tile = attemptToGetTileFromBuffer(point, buffer, grid);
       const biome = getBiomeById(tile.biomeId);
       const neighbours = getNeighourTilesFromBuffer(grid, buffer, Point(1, 1));
 
@@ -163,7 +177,16 @@ export const tick = (grid: BiomeTile[][]): BiomeTile[][] => {
     });
   });
 
-  console.log(buffer);
+  console.log(
+    ...buffer.map((arr) => {
+      return arr.map((tile) => {
+        return {
+          type: tile.typeId,
+          water: tile.conditions.waterLevel,
+        };
+      });
+    })
+  );
   // const moisture = processMoistureChange(
   //   tile,
   //   Point(1, 1),
