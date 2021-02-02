@@ -5,6 +5,7 @@ import {
   iterateGrid,
   directions,
   add,
+  newArrayOfSize,
 } from "../grid/grid";
 import { Point } from "../grid/positions";
 import { timeFunctionPerformance } from "../tools/debug";
@@ -117,8 +118,24 @@ const getNeighourTilesFromBuffer = (
   });
 };
 
+const addOrUpdateBuffer = (
+  tile: BiomeTile,
+  buffer: BiomeTile[][]
+): BiomeTile[][] => {
+  const x = tile.point.x;
+  const y = tile.point.y;
+
+  const yAxis = buffer[x];
+
+  return [
+    ...buffer.slice(0, x),
+    [...yAxis.slice(0, y), tile, ...yAxis.slice(y + 1)],
+    ...buffer.slice(x + 1),
+  ];
+};
+
 export const tick = (grid: BiomeTile[][]): BiomeTile[][] => {
-  const buffer: BiomeTile[][] = [];
+  let buffer: BiomeTile[][] = newArrayOfSize();
 
   timeFunctionPerformance(() => {
     iterateGrid((point) => {
@@ -126,16 +143,27 @@ export const tick = (grid: BiomeTile[][]): BiomeTile[][] => {
       const biome = getBiomeById(tile.biomeId);
       const neighbours = getNeighourTilesFromBuffer(grid, buffer, Point(1, 1));
 
-      processMoistureChange(
+      const { updatedTile, updatedNeighbours } = processMoistureChange(
         tile,
         point,
         biome,
         getBiomeTileTypeById(tile.typeId, biome),
         neighbours
       );
+
+      buffer = addOrUpdateBuffer(updatedTile, buffer);
+
+      updatedNeighbours.forEach((neighbour) => {
+        if (neighbour == null) {
+          return;
+        }
+
+        buffer = addOrUpdateBuffer(neighbour, buffer);
+      });
     });
   });
 
+  console.log(buffer);
   // const moisture = processMoistureChange(
   //   tile,
   //   Point(1, 1),

@@ -61,3 +61,9 @@ export const iterateGrid = (callback: (point: Point) => void) => {
     }
   }
 };
+
+export const newArrayOfSize = () => {
+  return new Array(gridSize)
+    .fill(null)
+    .map(() => new Array(gridSize).fill(null));
+};
