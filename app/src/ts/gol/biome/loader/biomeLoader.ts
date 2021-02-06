@@ -1,14 +1,21 @@
 import * as biomesJson from "../../../../../assets/biome/biomes.json";
 import * as z from "zod";
-import { BiomeTileValidator, ConditionValidator } from "./biomeTileLoader";
+import { BiomeTileValidator } from "./biomeTileLoader";
 
 const json = (biomesJson as any)["default"];
+
+const BiomeConditions = z.object({
+  heat: z.number(),
+  temperature: z.number(),
+  waterLevel: z.number(),
+  fetility: z.number(),
+});
 
 const BiomeValidator = z.object({
   id: z.string(),
   name: z.string(),
   tiles: z.array(BiomeTileValidator),
-  conditions: ConditionValidator,
+  conditions: BiomeConditions,
 });
 
 export type BiomeConfig = z.infer<typeof BiomeValidator>;

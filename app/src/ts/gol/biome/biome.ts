@@ -159,7 +159,6 @@ export const tick = (grid: BiomeTile[][]): BiomeTile[][] => {
 
       const { updatedTile, updatedNeighbours } = processMoistureChange(
         tile,
-        point,
         biome,
         getBiomeTileTypeById(tile.typeId, biome),
         neighbours
@@ -183,32 +182,10 @@ export const tick = (grid: BiomeTile[][]): BiomeTile[][] => {
         return {
           type: tile.typeId,
           water: tile.conditions.waterLevel,
+          moisture: tile.conditions.moisture,
         };
       });
     })
   );
-  // const moisture = processMoistureChange(
-  //   tile,
-  //   Point(1, 1),
-  //   biome,
-  //   getBiomeTileTypeById(tile.typeId, biome),
-  //   neighbours
-  // );
-
-  // iterateGrid((point) => {
-  //   const tile = grid[point.x][point.y];
-  //   const biome = getBiomeById(tile.biomeId);
-  //   const tileType = getBiomeTileTypeById(tile.typeId, biome);
-  //   const neighbours = getNeighbours(point, grid);
-
-  //   const moisture = processMoistureChange(
-  //     tile,
-  //     point,
-  //     biome,
-  //     tileType,
-  //     neighbours
-  //   );
-  // });
-
   return buffer;
 };

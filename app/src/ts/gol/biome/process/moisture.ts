@@ -86,7 +86,6 @@ const processWaterMovement = (tile: BiomeTile, neighbours: BiomeTile[]) => {
 
 export const processMoistureChange = (
   tile: BiomeTile,
-  point: Point,
   biome: BiomeConfig,
   tileType: BiomeTileConfig,
   neighbours: BiomeTile[]
@@ -96,10 +95,23 @@ export const processMoistureChange = (
     neighbours
   );
 
-  const moistureRate = tile.transferRate.moisture;
-  const biomeTemp = biome.conditions.temperature;
+  const biomeTemp = biome.conditions.heat;
+  const transferRate = updatedTile.transferRate.heat;
+  const currentMoisture = updatedTile.conditions.moisture;
+  const currentLevel = updatedTile.conditions.waterLevel;
 
-  const maxWater = tileType.saturation.water;
+  const calc = biomeTemp * transferRate * currentLevel;
+  const calc2 = currentLevel * currentMoisture;
+
+  console.log(
+    biomeTemp * transferRate,
+    calc,
+    calc2,
+    updatedTile.conditions.waterLevel
+  );
+  updatedTile.conditions.waterLevel -= calc;
+
+  updatedTile.conditions.moisture = calc + currentMoisture;
 
   return {
     updatedTile,

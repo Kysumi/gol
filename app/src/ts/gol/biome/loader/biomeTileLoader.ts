@@ -7,7 +7,7 @@ const TransferRateValidator = z.object({
 });
 
 export const ConditionValidator = z.object({
-  humidity: z.number(),
+  moisture: z.number(),
   temperature: z.number(),
   waterLevel: z.number(),
   fetility: z.number(),
