@@ -1,6 +1,5 @@
 import { Point } from "./positions";
 import { gridSize } from "../config/grid";
-import { BiomeTile } from "../biome/biomeTile";
 // export const directions = [Hex(1, 0, -1), Hex(0, 1, -1), Hex(-1, 1, 0), Hex(-1, 0, 1), Hex(0, -1, 1), Hex(1, -1, 0)]
 // const hex_diagonals = [Hex(2, -1, -1), Hex(1, -2, 1), Hex(-1, -1, 2), Hex(-2, 1, 1), Hex(-1, 2, -1), Hex(1, 1, -2)]
 

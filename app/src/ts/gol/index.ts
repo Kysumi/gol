@@ -8,8 +8,8 @@ import { getTypeById } from "./biome/type";
 import { Application, Graphics, Ticker } from "pixi.js";
 import { BiomeTile } from "./biome/biomeTile";
 import biomes from "./biome/loader/biomeLoader";
-
 import { drawDebug } from "./tools/debug";
+import { getRadius } from "./config/hexConfig";
 
 interface HexTile {
   hex: Graphics;
@@ -31,7 +31,7 @@ export const gol = (app: Application) => {
     drawDebug(app, ticker, app.renderer);
   });
 
-  const layout = Layout(pointyLayout, Point(30, 30));
+  const layout = Layout(pointyLayout, Point(getRadius(), getRadius()));
   const biome = biomes[0];
 
   iterateGrid((point: Point) => {

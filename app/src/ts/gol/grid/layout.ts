@@ -77,6 +77,15 @@ export const Layout = (orientation: Orientation, size: Point): Layout => {
   return { orientation: orientation, size: size };
 };
 
+export const isofy = (point: Point): Point => {
+  const { x, y } = point;
+
+  const pointX = x - y;
+  const pointY = (x + y) / 2;
+
+  return Point(pointX, pointY);
+};
+
 // export const XOffsetFromPoint = (offset: number, point: Point) => {
 //   const x = point.x + Math.trunc((point.y + offset * (point.y & 1)) / 2);
 //   const y = point.y;
@@ -113,7 +122,7 @@ export const gridToWorldPosition = (layout: Layout, point: Point) => {
   renderX += getOffsetX();
   renderY += getOffsetY();
 
-  return Point(renderX, renderY);
+  return isofy(Point(renderX, renderY));
 };
 
 const wrapToTile = (axisCord: number): number => {
