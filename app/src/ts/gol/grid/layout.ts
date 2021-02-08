@@ -77,6 +77,12 @@ export const Layout = (orientation: Orientation, size: Point): Layout => {
   return { orientation: orientation, size: size };
 };
 
+/**
+ * Will give you the isometric coordinates from the 2d
+ * world coordinates
+ *
+ * @param point
+ */
 export const isofy = (point: Point): Point => {
   const { x, y } = point;
 
@@ -84,6 +90,18 @@ export const isofy = (point: Point): Point => {
   const pointY = (x + y) / 2;
 
   return Point(pointX, pointY);
+};
+
+/**
+ * Convert isometric coordinates back into 2d screen coordinates
+ *
+ * @param point
+ */
+export const isoTo2d = (point: Point): Point => {
+  const x = (2 * point.y + point.x) / 2;
+  const y = (2 * point.y - point.x) / 2;
+
+  return Point(x, y);
 };
 
 // export const XOffsetFromPoint = (offset: number, point: Point) => {
