@@ -33,7 +33,7 @@ let menu = Menu.buildFromTemplate([
       {
         label:'Console',
         click: function(){
-          hideWindow("GOL");
+          showWindow("console");
         }
       }
       ]
