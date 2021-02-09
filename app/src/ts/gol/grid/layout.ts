@@ -62,19 +62,18 @@ export const flatLayout = Orientation(
   0.0
 );
 
-// eslint-disable-next-line no-unused-vars
-const offsets = {
-  odd: -1,
-  even: 1,
-};
-
 export interface Layout {
   orientation: Orientation;
   size: Point;
+  offset: (point: Point) => Point;
 }
 
-export const Layout = (orientation: Orientation, size: Point): Layout => {
-  return { orientation: orientation, size: size };
+export const Layout = (
+  orientation: Orientation,
+  size: Point,
+  offset: (point: Point) => Point
+): Layout => {
+  return { orientation: orientation, size: size, offset };
 };
 
 /**
@@ -104,20 +103,6 @@ export const isoTo2d = (point: Point): Point => {
   return Point(x, y);
 };
 
-// export const XOffsetFromPoint = (offset: number, point: Point) => {
-//   const x = point.x + Math.trunc((point.y + offset * (point.y & 1)) / 2);
-//   const y = point.y;
-
-//   return Point(x, y);
-// };
-
-// export const YOffsetFromPoint = (offset: number, h) => {
-//   const col = h.x;
-//   const row = h.y + Math.trunc((h.x + offset * (h.x & 1)) / 2);
-
-//   return Point(col, row);
-// };
-
 /**
  * Based on the provided grid point this function will return
  * a point in the pixel position
@@ -128,19 +113,7 @@ export const isoTo2d = (point: Point): Point => {
  * @return {Point}  The pixel position
  */
 export const gridToWorldPosition = (layout: Layout, point: Point) => {
-  let renderX = point.x * 2;
-  let renderY = point.y * 2;
-  if (renderY % 4 !== 0) {
-    renderX++;
-  }
-
-  renderX *= (Math.sqrt(3) / 2) * getRadius();
-  renderY *= (getRadius() / 4) * 3.0;
-
-  renderX += getOffsetX();
-  renderY += getOffsetY();
-
-  return isofy(Point(renderX, renderY));
+  return isofy(layout.offset(point));
 };
 
 const wrapToTile = (axisCord: number): number => {

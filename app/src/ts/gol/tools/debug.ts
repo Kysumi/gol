@@ -1,6 +1,7 @@
 import * as pixi from "pixi.js";
 import { Point } from "../grid/positions";
 import { Layout, pointyLayout, worldPositionToGrid } from "../grid/layout";
+import { rowOffestOdd } from "../grid/offset";
 
 const background = new pixi.Graphics();
 background.beginFill(0x989898);
@@ -42,7 +43,7 @@ const showMouseLocation = (app: pixi.Application, renderer: pixi.Renderer) => {
     mouse = { x: 0, y: 0 };
     girdLocation = Point(0, 0);
   } else {
-    const layout = Layout(pointyLayout, Point(30, 30));
+    const layout = Layout(pointyLayout, Point(30, 30), rowOffestOdd);
     girdLocation = worldPositionToGrid(
       layout,
       Point(Math.round(mouse.x), Math.round(mouse.y))

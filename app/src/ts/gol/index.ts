@@ -10,6 +10,7 @@ import { BiomeTile } from "./biome/biomeTile";
 import biomes from "./biome/loader/biomeLoader";
 import { drawDebug } from "./tools/debug";
 import { getRadius } from "./config/hexConfig";
+import { rowOffestOdd } from "./grid/offset";
 
 interface HexTile {
   hex: Graphics;
@@ -31,7 +32,12 @@ export const gol = (app: Application) => {
     drawDebug(app, ticker, app.renderer);
   });
 
-  const layout = Layout(pointyLayout, Point(getRadius(), getRadius()));
+  const layout = Layout(
+    pointyLayout,
+    Point(getRadius(), getRadius()),
+    rowOffestOdd
+  );
+
   const biome = biomes[0];
 
   iterateGrid((point: Point) => {
