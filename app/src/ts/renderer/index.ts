@@ -13,6 +13,7 @@ document.addEventListener(
     });
     document.body.appendChild(app.view);
 
+    app.renderer.backgroundColor = 0xffffff;
     gol(app);
   },
   false
