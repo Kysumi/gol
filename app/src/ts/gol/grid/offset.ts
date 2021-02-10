@@ -16,7 +16,7 @@ const rowOffset = (point: Point, shouldOffset: boolean) => {
   const renderX = x * offset * hexRadius + getOffsetX();
   const renderY = y * ((hexRadius / 4) * 3 + getOffsetY());
 
-  return Point(Math.round(renderX), Math.round(renderY));
+  return Point(renderX, renderY);
 };
 
 export const rowOffestOdd = (point: Point): Point => {
