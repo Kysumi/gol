@@ -51,13 +51,10 @@ const makeNewTile = (
   point: Point,
   grid: BiomeTile[][]
 ): BiomeTile => {
-  // const neighbours = getNeighbours(point, grid) as BiomeTileType[];
-  // const count = [];
-  // const collection = neighbours.reduce((accu, current) => {});
-
   const tileTypeId = Math.floor(Math.random() * biome.tiles.length);
   const tileType = biome.tiles[tileTypeId];
 
+  // TODO take into account the biome and neighbours if they exist
   const type = {
     biomeId: biome.id,
     ...tileType,

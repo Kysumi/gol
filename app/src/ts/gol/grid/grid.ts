@@ -1,7 +1,5 @@
 import { Point } from "./positions";
 import { gridSize } from "../config/grid";
-// export const directions = [Hex(1, 0, -1), Hex(0, 1, -1), Hex(-1, 1, 0), Hex(-1, 0, 1), Hex(0, -1, 1), Hex(1, -1, 0)]
-// const hex_diagonals = [Hex(2, -1, -1), Hex(1, -2, 1), Hex(-1, -1, 2), Hex(-2, 1, 1), Hex(-1, 2, -1), Hex(1, 1, -2)]
 
 export const add = (a: Point, b: Point) => {
   return Point(a.x + b.x, a.y + b.y);
@@ -29,7 +27,6 @@ export const getFromGrid = (point: Point, grid: any): any | null => {
 export const getNeighbours = (point: Point, grid: any) => {
   return directions.map((direction) => {
     const position = add(point, direction);
-    console.log(position);
     if (position.x < 0 || position.x >= grid.length) {
       return null;
     }
