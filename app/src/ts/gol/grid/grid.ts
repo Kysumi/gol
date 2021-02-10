@@ -34,10 +34,6 @@ export const getNeighbours = (point: Point, grid: any) => {
       return null;
     }
 
-    if (position.y < 0 || position.y >= grid.length) {
-      return null;
-    }
-
     return getFromGrid(position, grid);
   });
 };
