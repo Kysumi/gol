@@ -14,7 +14,7 @@ interface Orientation {
   startAngle: number;
 }
 
-export const Orientation = (
+const Orientation = (
   f0: number,
   f1: number,
   f2: number,
