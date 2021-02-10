@@ -1,4 +1,4 @@
-import { add, getFromGrid } from "./grid";
+import { add, getFromGrid, getNeighbours } from "./grid";
 
 describe("Testing Add function", () => {
   test("test add with positive numbers", () => {
@@ -35,3 +35,14 @@ describe("getFromGrid", () => {
     expect(output).toBe("a");
   });
 });
+describe("getNeighbours", () => {
+  test("test with valid array", () => {
+    const map = [
+      ["a", "b", "c"],
+      ["d", "e", "f"],
+      ["g", "h", "i"],
+    ];
+
+    const output = getNeighbours({ x: 1, y: 1 }, map);
+    expect(output).toStrictEqual(["a", "d", "g", "h", "i", "f", "c", "b"]);
+  });
