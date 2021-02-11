@@ -1,13 +1,11 @@
 import {
   addToGrid,
-  getNeighbours,
   getFromGrid,
   iterateGrid,
   directions,
-  add,
   newArrayOfSize,
 } from "../grid/grid";
-import { Point } from "../grid/positions";
+import { add, Point } from "../grid/positions";
 import { timeFunctionPerformance } from "../tools/debug";
 import { BiomeTile } from "./biomeTile";
 import biomes, { BiomeConfig } from "./loader/biomeLoader";

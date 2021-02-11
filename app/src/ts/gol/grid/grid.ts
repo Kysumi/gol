@@ -1,9 +1,5 @@
-import { Point } from "./positions";
+import { add, Point } from "./positions";
 import { gridSize } from "../config/grid";
-
-export const add = (a: Point, b: Point) => {
-  return Point(a.x + b.x, a.y + b.y);
-};
 
 export const directions = [
   Point(-1, -1),
@@ -16,6 +12,13 @@ export const directions = [
   Point(-1, 0),
 ];
 
+/**
+ * Will attempt to get the record from the array at the specified index
+ * will return null if it doens't exist
+ *
+ * @param point
+ * @param grid
+ */
 export const getFromGrid = (point: Point, grid: any): any | null => {
   const slice = grid[point.x];
 
@@ -26,6 +29,12 @@ export const getFromGrid = (point: Point, grid: any): any | null => {
   return slice[point.y];
 };
 
+/**
+ * Returns all of the neigbhouring tiles for the specified point
+ *
+ * @param point
+ * @param grid
+ */
 export const getNeighbours = (point: Point, grid: any) => {
   return directions.map((direction) => {
     const position = add(point, direction);
@@ -38,6 +47,13 @@ export const getNeighbours = (point: Point, grid: any) => {
   });
 };
 
+/**
+ * inserts or updates the object into the array at the specified location
+ *
+ * @param grid
+ * @param object
+ * @param point
+ */
 export const addToGrid = (grid: any[], object: any, point: Point) => {
   const x = point.x;
   const y = point.y;
@@ -57,6 +73,11 @@ export const addToGrid = (grid: any[], object: any, point: Point) => {
   ];
 };
 
+/**
+ * Will iterate the each position in the grid
+ *
+ * @param callback
+ */
 export const iterateGrid = (callback: (point: Point) => void) => {
   for (let xGrid = 0; xGrid < gridSize; xGrid++) {
     for (let yGrid = 0; yGrid < gridSize; yGrid++) {
@@ -65,6 +86,9 @@ export const iterateGrid = (callback: (point: Point) => void) => {
   }
 };
 
+/**
+ * Creates a new array the same dimensions as the grid will null values
+ */
 export const newArrayOfSize = () => {
   return new Array(gridSize)
     .fill(null)
