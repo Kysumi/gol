@@ -79,7 +79,7 @@ export const setBiomeTileType = (
   point: Point,
   data: BiomeTile
 ): BiomeTile[][] => {
-  return addToGrid(biome, data, point.x);
+  return addToGrid(biome, data, point);
 };
 
 const getBiomeTileTypeById = (
@@ -119,16 +119,7 @@ const addOrUpdateBuffer = (
   tile: BiomeTile,
   buffer: BiomeTile[][]
 ): BiomeTile[][] => {
-  const x = tile.point.x;
-  const y = tile.point.y;
-
-  const yAxis = buffer[x];
-
-  return [
-    ...buffer.slice(0, x),
-    [...yAxis.slice(0, y), tile, ...yAxis.slice(y + 1)],
-    ...buffer.slice(x + 1),
-  ];
+  return addToGrid(buffer, tile, tile.point);
 };
 
 const attemptToGetTileFromBuffer = (

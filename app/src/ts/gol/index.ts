@@ -2,7 +2,12 @@ import { getHexObject, drawHexagon } from "./object/hexagon";
 import { debugTxt } from "./object/tileDebug";
 import { Layout, pointyLayout, gridToWorldPosition } from "./grid/layout";
 import { Point } from "./grid/positions";
-import { addToGrid, getFromGrid, iterateGrid } from "./grid/grid";
+import {
+  addToGrid,
+  getFromGrid,
+  iterateGrid,
+  newArrayOfSize,
+} from "./grid/grid";
 import { setBiomeTileType, getBiomeTileData, tick } from "./biome/biome";
 import { getTypeById } from "./biome/type";
 import { Application, Graphics, Ticker } from "pixi.js";
@@ -16,8 +21,8 @@ interface HexTile {
   hex: Graphics;
 }
 
-let grid: HexTile[][] = [];
-let biomeGrid: BiomeTile[][] = [];
+let grid: HexTile[][] = newArrayOfSize();
+let biomeGrid: BiomeTile[][] = newArrayOfSize();
 let mainApp: Application;
 let ticker = Ticker.shared;
 
@@ -63,7 +68,7 @@ export const gol = (app: Application) => {
       hex: hex,
     };
 
-    grid = addToGrid(grid, tileObject, point.x);
+    grid = addToGrid(grid, tileObject, point);
 
     const txt = debugTxt(point.x, point.y);
     txt.position.x = x - 10;

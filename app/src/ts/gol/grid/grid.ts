@@ -38,16 +38,23 @@ export const getNeighbours = (point: Point, grid: any) => {
   });
 };
 
-export const addToGrid = (grid: any, object: any, xPosition: number) => {
-  const newGrid = grid;
+export const addToGrid = (grid: any[], object: any, point: Point) => {
+  const x = point.x;
+  const y = point.y;
 
-  if (xPosition > newGrid.length || xPosition === 0) {
-    newGrid.push([]);
+  const yAxis = grid[x];
+
+  if (grid.length < x || yAxis === null) {
+    throw new Error(
+      `Failed to insert object into array at point ${point.x}, ${point.y}`
+    );
   }
 
-  newGrid[xPosition].push(object);
-
-  return newGrid;
+  return [
+    ...grid.slice(0, x),
+    [...yAxis.slice(0, y), object, ...yAxis.slice(y + 1)],
+    ...grid.slice(x + 1),
+  ];
 };
 
 export const iterateGrid = (callback: (point: Point) => void) => {

@@ -1,4 +1,4 @@
-import { add, getFromGrid, getNeighbours } from "./grid";
+import { add, addToGrid, getFromGrid, getNeighbours } from "./grid";
 
 describe("Testing Add function", () => {
   test("test add with positive numbers", () => {
@@ -82,6 +82,32 @@ describe("getNeighbours", () => {
       null,
       null,
       null,
+    ]);
+  });
+});
+
+describe("addToGrid", () => {
+  test("test with empty array", () => {
+    expect(() => addToGrid([], "b", { x: 20, y: 1 })).toThrow(
+      "Failed to insert object into array at point 20, 1"
+    );
+  });
+
+  test("test with valid array", () => {
+    const output = addToGrid(
+      [
+        ["a", "d", "c", "d"],
+        ["e", "f", "g", "h"],
+        ["i", "j", "k", "l"],
+      ],
+      12312,
+      { x: 1, y: 3 }
+    );
+
+    expect(output).toStrictEqual([
+      ["a", "d", "c", "d"],
+      ["e", "f", "g", 12312],
+      ["i", "j", "k", "l"],
     ]);
   });
 });
