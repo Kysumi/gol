@@ -1,7 +1,10 @@
 {
-    "title": "console",
-    "entrypoint" : "console.html",
-    "size": [800,600],
-    "show": false,
-    "hideOnClose": true
+  "title": "console",
+  "url": "http://localhost:3000",
+  "size": {
+    "height": 800,
+    "width": 600
+  },
+  "show": false,
+  "hideOnClose": true
 }
