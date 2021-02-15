@@ -1,0 +1,56 @@
+{
+  "npmScope": "bestagon",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "accessToken": "NTE2MTczNWItOWQ2Ny00ZjQ0LWI3NzctMjk1MzFjMzViNzBmfHJlYWQtd3JpdGU=",
+        "cacheableOperations": [
+          "build",
+          "test",
+          "lint",
+          "e2e"
+        ],
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
+    }
+  },
+  "projects": {
+    "console": {
+      "tags": []
+    },
+    "console-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "console"
+      ]
+    },
+    "bestagon": {
+      "tags": []
+    },
+    "bestagon-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "bestagon"
+      ]
+    },
+    "electron": {
+      "tags": []
+    }
+  }
+}
