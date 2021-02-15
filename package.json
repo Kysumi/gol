@@ -2,6 +2,13 @@
   "name": "bestagon",
   "version": "0.0.0",
   "license": "MIT",
+  "author": {
+    "name": "Scott Maunder"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kysumi/gol.git"
+  },
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
