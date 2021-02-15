@@ -12,16 +12,30 @@ Libraries are sharable across libraries and applications. They can be imported f
 
 ## Dev mode
 
-### Run webpack renderer and main dev-server
+### Installing NX
+
+This project is using NX to manage the mono repo
 
 ```bash
-npm start
+npm install -g nx
 ```
 
-### Run electron in another terminal instance
+### Starting the application
+
+Start the application and all dependencies
 
 ```bash
-npm run electron-dev
+nx run bestagon:all
+```
+
+### Alternatively you can start them individually
+
+```bash
+nx serve electron
+
+nx serve console --port=8080
+
+nx serve bestagon
 ```
 
 ## Wallaby.js

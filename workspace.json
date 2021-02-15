@@ -62,9 +62,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/console/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["apps/console/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
@@ -97,9 +95,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/console-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/console-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -110,6 +106,23 @@
       "projectType": "application",
       "schematics": {},
       "architect": {
+        "all": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "nx serve electron"
+              },
+              {
+                "command": "nx serve console --port=8080"
+              },
+              {
+                "command": "nx serve bestagon"
+              }
+            ],
+            "parallel": true
+          }
+        },
         "build": {
           "builder": "@nrwl/web:build",
           "options": {
@@ -122,9 +135,7 @@
               "apps/bestagon/src/favicon.ico",
               "apps/bestagon/src/assets"
             ],
-            "styles": [
-              "apps/bestagon/src/styles.css"
-            ],
+            "styles": ["apps/bestagon/src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -166,9 +177,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/bestagon/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/bestagon/**/*.ts"]
           }
         },
         "test": {
@@ -201,9 +210,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/bestagon-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/bestagon-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -221,9 +228,7 @@
             "outputPath": "dist/apps/electron",
             "main": "apps/electron/src/main.ts",
             "tsConfig": "apps/electron/tsconfig.app.json",
-            "assets": [
-              "apps/electron/src/assets"
-            ]
+            "assets": ["apps/electron/src/assets"]
           },
           "configurations": {
             "production": {
@@ -265,9 +270,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/electron/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/electron/**/*.ts"]
           }
         },
         "test": {
